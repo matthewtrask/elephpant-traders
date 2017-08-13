@@ -5251,6 +5251,78 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes_js__ = __webpack_require__(17);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  user: {
+    authenticated: false,
+    profile: null
+  },
+
+  check: function check() {
+    var _this = this;
+
+    var token = localStorage.getItem('id_token');
+    if (token !== null) {
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/user?token=' + token).then(function (response) {
+        _this.user.authenticated = true;
+        _this.user.profile = response.data.data;
+      });
+    }
+  },
+  register: function register(context, email, password, name, twitter) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api/register', {
+      email: email,
+      password: password,
+      name: name,
+      twitter: twitter
+    }).then(function (response) {
+      context.success = true;
+      __WEBPACK_IMPORTED_MODULE_1__routes_js__["a" /* default */].push({
+        name: 'LoginComponent'
+      });
+    }, function (response) {
+      context.response = response.data;
+      context.error = true;
+    });
+  },
+  signin: function signin(context, email, password) {
+    var _this2 = this;
+
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api/login', {
+      email: email,
+      password: password
+    }).then(function (response) {
+      context.error = false;
+      localStorage.setItem('id_token', response.data.meta.token);
+      window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
+
+      _this2.user.authenticated = true;
+      _this2.user.profile = response.data.data;
+
+      __WEBPACK_IMPORTED_MODULE_1__routes_js__["a" /* default */].push({
+        name: 'ProfileComponent'
+      }, function (response) {
+        context.error = true;
+      });
+    });
+  },
+  signout: function signout() {
+    localStorage.removeItem('id_token');
+    this.user.authenticated = false;
+    this.user.profile = null;
+  }
+});
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -22342,7 +22414,7 @@ module.exports = function normalizeComponent (
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(10)(module)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22440,73 +22512,6 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(141)))
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes_js__ = __webpack_require__(17);
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  user: {
-    authenticated: false,
-    profile: null
-  },
-
-  check: function check() {
-    var _this = this;
-
-    var token = localStorage.getItem('id_token');
-    if (token !== null) {
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/user?token=' + token).then(function (response) {
-        _this.user.authenticated = true;
-        _this.user.profile = response.data.data;
-      });
-    }
-  },
-  register: function register(context, email, password) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api/register', {
-      email: email,
-      password: password
-    }).then(function (response) {
-      context.success = true;
-    }, function (response) {
-      context.response = response.data;
-      context.error = true;
-    });
-  },
-  signin: function signin(context, email, password) {
-    var _this2 = this;
-
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api/login', {
-      email: email,
-      password: password
-    }).then(function (response) {
-      context.error = false;
-      localStorage.setItem('id_token', response.data.meta.token);
-      window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
-
-      _this2.user.authenticated = true;
-      _this2.user.profile = response.data.data;
-
-      __WEBPACK_IMPORTED_MODULE_1__routes_js__["a" /* default */].push({
-        name: 'Profile'
-      }, function (response) {
-        context.error = true;
-      });
-    });
-  },
-  signout: function signout() {
-    localStorage.removeItem('id_token');
-    this.user.authenticated = false;
-    this.user.profile = null;
-  }
-});
 
 /***/ }),
 /* 9 */
@@ -25387,11 +25392,13 @@ var routes = [{
 }, {
   path: '/profile',
   component: __WEBPACK_IMPORTED_MODULE_4__components_seller_profile_vue___default.a,
-  name: 'ProfileComponent'
+  name: 'ProfileComponent',
+  meta: { requiresAuth: false }
 }, {
-  path: '/profile/post',
+  path: '/profile/elephpant/post',
   component: __WEBPACK_IMPORTED_MODULE_5__components_seller_post_vue___default.a,
-  name: 'ProfilePostComponent'
+  name: 'ProfilePostComponent',
+  meta: { requiresAuth: false }
 }, {
   path: '/register',
   component: __WEBPACK_IMPORTED_MODULE_6__components_auth_register_vue___default.a,
@@ -36508,7 +36515,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__routes_js__ = __webpack_require__(17);
-window._ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__auth_js__ = __webpack_require__(6);
+window._ = __webpack_require__(7);
+
 
 
 
@@ -36540,7 +36549,7 @@ __WEBPACK_IMPORTED_MODULE_4__routes_js__["a" /* default */].beforeEach(function 
   if (to.matched.some(function (record) {
     return record.meta.requiresAuth;
   })) {
-    if (!auth.loggedIn()) {
+    if (!__WEBPACK_IMPORTED_MODULE_5__auth_js__["a" /* default */].check()) {
       next({
         path: '/login',
         query: { redirect: to.fullPath }
@@ -48246,7 +48255,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(12);
 var Axios = __webpack_require__(140);
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 
 /**
  * Create an instance of Axios
@@ -48329,7 +48338,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 var utils = __webpack_require__(1);
 var InterceptorManager = __webpack_require__(150);
 var dispatchRequest = __webpack_require__(151);
@@ -49051,7 +49060,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(152);
 var isCancel = __webpack_require__(15);
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -49419,10 +49428,11 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__auth_js__ = __webpack_require__(6);
 //
 //
 //
@@ -49447,6 +49457,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -49455,8 +49466,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      auth: __WEBPACK_IMPORTED_MODULE_3__auth_js__["a" /* default */]
     };
+  },
+  created: function created() {
+    return __WEBPACK_IMPORTED_MODULE_3__auth_js__["a" /* default */].check();
   },
 
 
@@ -50069,7 +50084,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 //
 //
@@ -50261,7 +50276,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.image {\n  height: 10rem;\n  width: 10rem;\n}\na {\n  color: #fff;\n}\na:hover {\n    color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -50274,7 +50289,45 @@ exports.push([module.i, "", ""]);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth_js__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -50290,11 +50343,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      auth: __WEBPACK_IMPORTED_MODULE_1__auth_js__["a" /* default */]
+      auth: __WEBPACK_IMPORTED_MODULE_1__auth_js__["a" /* default */],
+      user: __WEBPACK_IMPORTED_MODULE_1__auth_js__["a" /* default */].user
     };
   },
   created: function created() {
-    __WEBPACK_IMPORTED_MODULE_1__auth_js__["a" /* default */].check();
+    return __WEBPACK_IMPORTED_MODULE_1__auth_js__["a" /* default */].check();
   }
 });
 
@@ -50303,7 +50357,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div')
+  return _c('div', [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-12 col-md-4"
+  }, [_c('h1', [_vm._v(" " + _vm._s(_vm.user.profile.name))]), _vm._v(" "), _c('img', {
+    staticClass: "image img-responsive img-circle",
+    attrs: {
+      "src": _vm.user.profile.image,
+      "alt": "Responsive image"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-8"
+  }, [_c('h3', {
+    staticClass: "text-right"
+  }, [_vm._v("Profile Information")]), _vm._v(" "), _c('p', {
+    staticClass: "text-right"
+  }, [_c('a', {
+    attrs: {
+      "href": 'https://twitter.com/' + _vm.user.profile.twitter
+    }
+  }, [_vm._v("@" + _vm._s(_vm.user.profile.twitter))])]), _vm._v(" "), _c('p', {
+    staticClass: "text-right"
+  }, [_vm._v("Elephpants posted: " + _vm._s(_vm.user.profile.elephpantCount))]), _vm._v(" "), _c('p', {
+    staticClass: "text-right"
+  }, [_c('button', {
+    staticClass: "btn btn-success"
+  }, [_c('router-link', {
+    attrs: {
+      "to": "ProfilePostComponent"
+    }
+  }, [_vm._v("Add Elepahant")])], 1)])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, _vm._l((_vm.user.profile.posts.data), function(post) {
+    return _c('div', {
+      staticClass: "col-sm-12 col-md-4"
+    }, [_c('div', {
+      staticClass: "thumbnail"
+    }, [_c('img', {
+      attrs: {
+        "src": post.image,
+        "alt": "..."
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "caption"
+    }, [_c('h3', [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c('p', [_vm._v("Seller: " + _vm._s(post.seller))]), _vm._v(" "), _c('p', [_vm._v("Posted: " + _vm._s(_vm._f("date")(post.posted)))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(post.description))]), _vm._v(" "), _c('p', [_c('a', {
+      staticClass: "btn btn-primary",
+      attrs: {
+        "href": '/#/posts/' + post.id,
+        "role": "button"
+      }
+    }, [_vm._v("View Post")]), _vm._v(" "), _c('a', {
+      staticClass: "btn btn-default",
+      attrs: {
+        "href": '/#/sellers/' + post.sellerId,
+        "role": "button"
+      }
+    }, [_vm._v("View Seller")])])])])])
+  }))])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -50430,21 +50541,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -50470,7 +50566,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.submitElephpant($event)
       }
     }
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3)])])])])
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group"
@@ -50489,36 +50585,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Email"
     }
   })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-2 control-label",
-    attrs: {
-      "for": "inputPassword3"
-    }
-  }, [_vm._v("Password")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-10"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "password",
-      "id": "inputPassword3",
-      "placeholder": "Password"
-    }
-  })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-2 col-sm-10"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  }), _vm._v(" Remember me\n                            ")])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group"
@@ -50631,7 +50697,7 @@ exports.push([module.i, "\n.error {\n  border: 1px solid red;\n}\n.disabled {\n 
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth__ = __webpack_require__(6);
 //
 //
 //
@@ -50730,7 +50796,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.createUser();
     },
     createUser: function createUser() {
-      var register = __WEBPACK_IMPORTED_MODULE_1__auth__["a" /* default */].register(this, this.email, this.password, this.firstName, this.lastName, this.preferredName, this.twitter, this.company);
+      var register = __WEBPACK_IMPORTED_MODULE_1__auth__["a" /* default */].register(this, this.email, this.password, this.name, this.twitter);
     },
     emptyForm: function emptyForm() {
       this.name = '';
@@ -51051,7 +51117,7 @@ exports.push([module.i, "\na {\n  color: #2ab27b;\n}\na:hover {\n    color: #2ab
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth__ = __webpack_require__(6);
 //
 //
 //

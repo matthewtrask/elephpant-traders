@@ -26,12 +26,18 @@
   import axios from 'axios';
   import { orderBy } from 'lodash';
   import Moment from 'moment';
+  import auth from '../auth.js';
 
   export default {
     data() {
       return {
         posts: [],
+        auth: auth,
       };
+    },
+
+    created() {
+      return auth.check();
     },
 
     computed: {

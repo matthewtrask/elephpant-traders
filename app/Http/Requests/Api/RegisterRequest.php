@@ -13,7 +13,27 @@ class RegisterRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    public function getName()
+    {
+        return $this->get('name');
+    }
+
+    public function getEmail()
+    {
+        return $this->get('email');
+    }
+
+    public function getTwitter()
+    {
+        return $this->get('twitter');
+    }
+
+    public function getPassword()
+    {
+        return $this->get('password');
     }
 
     /**
@@ -24,7 +44,10 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required|string|unique:users',
+            'name' => 'required|string',
+            'twitter' => 'required|string',
+            'password' => 'required|string',
         ];
     }
 }

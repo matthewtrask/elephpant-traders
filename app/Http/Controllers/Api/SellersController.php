@@ -14,7 +14,7 @@ class SellersController extends Controller
     private $response;
 
     /**
-     * @var SellerRepository
+     * @var UserRepository
      */
     private $repository;
 
@@ -23,11 +23,16 @@ class SellersController extends Controller
      */
     private $transformer;
 
-    public function __construct(Response $response, SellerRepository $repository, SellerTransformer $transformer)
+    public function __construct(Response $response, UserRepository $repository, SellerTransformer $transformer)
     {
         $this->response = $response;
         $this->repository = $repository;
         $this->transformer = $transformer;
+    }
+
+    public function create()
+    {
+
     }
 
     public function show(Request $request)

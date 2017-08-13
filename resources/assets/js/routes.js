@@ -7,6 +7,7 @@ import ProfilePostComponent from './components/seller/post.vue';
 import RegisterComponent from './components/auth/register.vue';
 import LoginComponent from './components/auth/login.vue';
 
+
 const routes = [
   {
     path: '/',
@@ -27,11 +28,13 @@ const routes = [
     path: '/profile',
     component: ProfileComponent,
     name: 'ProfileComponent',
+    meta: { requiresAuth: false }
   },
   {
-    path: '/profile/post',
+    path: '/profile/elephpant/post',
     component: ProfilePostComponent,
     name: 'ProfilePostComponent',
+    meta: { requiresAuth: false }
   },
   {
     path: '/register',

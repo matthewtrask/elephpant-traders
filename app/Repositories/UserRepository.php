@@ -1,18 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: trask
- * Date: 8/2/17
- * Time: 1:22 PM
- */
 
 namespace App\Http\Controllers\Api;
-
 
 use App\User;
 use Illuminate\Database\Eloquent\Collection;
 
-class SellerRepository
+class UserRepository
 {
     /**
      * @param User $user
@@ -36,7 +29,13 @@ class SellerRepository
 
     public function create($data)
     {
+        $user = new User();
+        $user->name = $data->getName();
+        $user->email = $data->getEmail();
+        $user->twitter = $data->getTwitter();
+        $user->password = bcrypt($data->getPassword());
 
+        return $user->save();
     }
 
     public function edit($data)

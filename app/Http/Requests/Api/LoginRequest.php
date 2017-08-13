@@ -13,7 +13,17 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    public function getEmail()
+    {
+        return $this->get('email');
+    }
+
+    public function getPassword()
+    {
+        return $this->get('password');
     }
 
     /**
@@ -24,7 +34,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required|email',
+            'password' => 'required|string',
         ];
     }
 }

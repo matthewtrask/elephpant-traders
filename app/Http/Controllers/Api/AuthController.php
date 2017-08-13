@@ -5,15 +5,36 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Controllers\Controller;
+use App\User;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+    /**
+     * @var Response
+     */
+    private $response;
+
+    /**
+     * @var UserRepository
+     */
+    private $repository;
+
+    public function __construct(Response $response, UserRepository $repository)
+    {
+        $this->response = $response;
+        $this->repository = $repository;
+    }
+
     public function register(RegisterRequest $request)
     {
+        $this->repository->create($request);
 
+        return $this->response->setStatusCode(201)->setContent('User created');
     }
 
     public function create(LoginRequest $request)
@@ -22,6 +43,7 @@ class AuthController extends Controller
             $token = JWTAuth::attempt($request->only('email', 'password'), [
                 'exp' => Carbon::now()->addWeek()->timestamp,
             ]);
+            Auth::attempt(['email' => $request->getEmail(), 'password' => $request->getPassword()]);
         } catch (JWTException $e) {
             return response()->json([
                 'error' => 'Could not authenticate',
@@ -34,12 +56,17 @@ class AuthController extends Controller
         } else {
             $data = [];
             $meta = [];
-            $data['name'] = $request->user()->name;
+            $data['user'] = $request->user()->email();
             $meta['token'] = $token;
             return response()->json([
                 'data' => $data,
                 'meta' => $meta
             ]);
         }
+    }
+
+    public function destroy()
+    {
+
     }
 }

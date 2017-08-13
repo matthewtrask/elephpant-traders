@@ -17,12 +17,17 @@ export default {
     }
   },
 
-  register(context, email, password) {
+  register(context, email, password, name, twitter) {
     return axios.post('api/register', {
       email: email,
       password: password,
+      name: name,
+      twitter: twitter,
     }).then(response => {
       context.success = true;
+      router.push({
+        name: 'LoginComponent',
+      });
     }, response => {
       context.response = response.data;
       context.error = true;
@@ -42,7 +47,7 @@ export default {
       this.user.profile = response.data.data;
 
       router.push({
-        name: 'Profile'
+        name: 'ProfileComponent'
       }, response => {
         context.error = true
       });

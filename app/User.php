@@ -28,6 +28,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function userId() : int
+    {
+        return (int) $this->id;
+    }
+
+    public function email() : string
+    {
+        return $this->email;
+    }
+
+    public function scopeFindByEmail($query, string $email)
+    {
+        $query->where('email', '=', $email);
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class, 'seller_id', 'id');

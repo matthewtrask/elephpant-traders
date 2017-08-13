@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import Axios from 'axios';
 import router from './routes.js';
+import auth from './auth.js';
 
 try {
   window.$ = window.jQuery = require('jquery');
@@ -28,7 +29,7 @@ if (token) {
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!auth.loggedIn()) {
+    if (!auth.check()) {
       next({
         path: '/login',
         query: { redirect: to.fullPath }

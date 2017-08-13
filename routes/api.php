@@ -17,6 +17,9 @@ Route::get('elephpants', ['uses' => 'Api\PostingsController@index']);
 Route::get('elephpants/post/{id}', ['uses' => 'Api\PostingsController@show'])->where('id', '[0-9]+');
 Route::get('elephpants/sellers/{id}', ['uses' => 'Api\SellersController@show'])->where('id', '[0-9]+');
 
+Route::post('register', ['uses' => 'Api\AuthController@register']);
+Route::post('login', ['uses' => 'Api\AuthController@create']);
+
 Route::group(['middleware' => 'jwt.auth'], function() {
     Route::get('user', ['uses' => 'Api\UsersController@show']);
 });

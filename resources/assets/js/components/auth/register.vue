@@ -98,7 +98,7 @@
       },
 
       createUser() {
-        const register = auth.register(this, this.email, this.password, this.firstName, this.lastName, this.preferredName, this.twitter, this.company);
+        const register = auth.register(this, this.email, this.password, this.name, this.twitter);
       },
 
       emptyForm() {
