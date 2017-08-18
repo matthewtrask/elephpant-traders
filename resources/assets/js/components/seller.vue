@@ -22,6 +22,7 @@
                         <p>Seller: {{ post.seller }}</p>
                         <p>Posted: {{ post.posted | date }}</p>
                         <p>{{ post.description }}</p>
+                        <button class="btn btn-success">View Post</button>
                     </div>
                 </div>
             </div>

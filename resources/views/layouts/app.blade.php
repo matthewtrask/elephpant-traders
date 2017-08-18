@@ -34,11 +34,6 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -72,6 +67,15 @@
         </nav>
 
         @yield('content')
+        <footer>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-center">Copyright {{ date('Y') }} Matthew Trask</p>
+                    <p class="text-center">This project was inspired by <a href="https://twitter.com/colinodell">Colin O'Dell</a> and others in the community.</p>
+                    <p class="text-center">This project is opened sourced at <a href="https://github.com/matthewtrask/elephpant-traders">Github</a>. Read more about that on our <router-link to="about">about page</router-link></p>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- Scripts -->

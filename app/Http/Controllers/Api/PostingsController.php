@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Api\PostTransformer;
 use App\Http\Requests\Api\ElephpantRequest;
+use App\Http\Requests\Api\PostRequest;
+use App\Http\Requests\Api\RemoveElephpantRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -68,14 +70,14 @@ class PostingsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param PostRequest $request
      */
-    public function create($id)
+    public function create(PostRequest $request)
     {
-        //
+        $post = $this->repository->create($request);
+
+        return $this->response->setContent('Post was created');
+
     }
 
     /**
@@ -107,8 +109,10 @@ class PostingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $this->repository->destroy($id);
+
+        return $this->response->setStatusCode(204)->setContent('Deleted');
     }
 }

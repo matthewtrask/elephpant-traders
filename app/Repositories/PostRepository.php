@@ -29,7 +29,14 @@ class PostRepository
 
     public function create($data)
     {
+        $post = new Post();
 
+        $post->title = $data->getTitle();
+        $post->description = $data->getDescription();
+        $post->seller_id = $data->getUserId();
+        $post->image_link = $data->getImageUrl();
+
+        return $post->save();
     }
 
     public function update($data)
@@ -39,6 +46,8 @@ class PostRepository
 
     public function destroy(int $id)
     {
+        $post = $this->post->find($id);
 
+        return $post->delete();
     }
 }

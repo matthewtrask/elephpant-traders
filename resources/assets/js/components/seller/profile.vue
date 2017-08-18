@@ -22,9 +22,16 @@
                 <h3 class="text-right">Profile Information</h3>
                 <p class="text-right"><a  v-bind:href="'https://twitter.com/' + user.profile.twitter">@{{ user.profile.twitter }}</a></p>
                 <p class="text-right">Elephpants posted: {{ user.profile.elephpantCount }}</p>
-                <p class="text-right"><button class="btn btn-success"><router-link to="ProfilePostComponent">Add Elepahant</router-link></button></p>
+                <p class="text-right"><button class="btn btn-success"><router-link to="/profile/elephpant/post">Add Elepahant</router-link></button></p>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h2>Elephpants posted by you</h2>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-sm-12 col-md-4" v-for="post in user.profile.posts.data">
                 <div class="thumbnail">
@@ -35,8 +42,8 @@
                         <p>Posted: {{ post.posted | date }}</p>
                         <p>{{ post.description }}</p>
                         <p>
-                            <a v-bind:href="'/#/posts/' + post.id"  class="btn btn-primary" role="button">View Post</a>
-                            <a v-bind:href="'/#/sellers/' + post.sellerId" class="btn btn-default" role="button">View Seller</a>
+                            <a v-bind:href="'/#/elephpant/' + post.id + '/edit'"  class="btn btn-primary" role="button">Edit Post</a>
+                            <a @click="removePost(post.id)" class="btn btn-default" data-toggle="modal" data-target="#myModal" role="button">Remove Post</a>
                         </p>
                     </div>
                 </div>
@@ -47,17 +54,36 @@
 <script>
   import axios from 'axios';
   import auth from '../../auth.js';
+  import Moment from 'moment';
 
   export default {
     data() {
       return {
         auth: auth,
         user: auth.user,
+        showConfirmModal: false,
+        postId: '',
       }
+    },
+
+    methods:{
+      removePost(postId) {
+        axios.delete(`/api/elephpants/remove/${postId}`).then(response => {
+          auth.check();
+        }).catch(error => {
+          console.error(error);
+        });
+      },
     },
 
     created() {
       return auth.check();
     },
+
+    filters: {
+      date(value) {
+        return Moment(value.date).format('MM/DD/YYYY');
+      },
+    }
   };
 </script>

@@ -8350,3 +8350,16 @@ button.close {
   }
 }
 
+.content {
+  padding: 0 0 100px;
+  position: relative;
+}
+
+footer {
+  bottom: 0;
+  height: 100px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+

@@ -40,10 +40,10 @@ class AuthController extends Controller
     public function create(LoginRequest $request)
     {
         try {
+            \Auth::login(['email' => $request->getEmail(), 'password' => $request->getPassword()]);
             $token = JWTAuth::attempt($request->only('email', 'password'), [
                 'exp' => Carbon::now()->addWeek()->timestamp,
             ]);
-            Auth::attempt(['email' => $request->getEmail(), 'password' => $request->getPassword()]);
         } catch (JWTException $e) {
             return response()->json([
                 'error' => 'Could not authenticate',

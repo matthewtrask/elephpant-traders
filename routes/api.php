@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 Route::get('elephpants', ['uses' => 'Api\PostingsController@index']);
 Route::get('elephpants/post/{id}', ['uses' => 'Api\PostingsController@show'])->where('id', '[0-9]+');
 Route::get('elephpants/sellers/{id}', ['uses' => 'Api\SellersController@show'])->where('id', '[0-9]+');
+Route::delete('elephpants/remove/{id}', ['uses' => 'Api\PostingsController@destroy'])->where('id', '[0-9]+');
+Route::post('elephpants/image', ['uses' => 'Api\ImageController@create']);
+Route::post('elephpants', ['uses' => 'Api\PostingsController@create']);
 
 Route::post('register', ['uses' => 'Api\AuthController@register']);
 Route::post('login', ['uses' => 'Api\AuthController@create']);

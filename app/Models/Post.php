@@ -5,11 +5,16 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 
 class Post extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'postings';
+
+    protected $dates = ['deleted_at'];
 
     public function seller() : BelongsTo
     {
