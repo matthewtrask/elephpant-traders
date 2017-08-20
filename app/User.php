@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Models\Post;
+use App\Models\Wanted;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -43,8 +45,13 @@ class User extends Authenticatable
         $query->where('email', '=', $email);
     }
 
-    public function posts()
+    public function posts() : HasMany
     {
         return $this->hasMany(Post::class, 'seller_id', 'id');
+    }
+
+    public function wishlist() : HasMany
+    {
+        return $this->hasMany(Wanted::class, 'seller_id', 'id');
     }
 }

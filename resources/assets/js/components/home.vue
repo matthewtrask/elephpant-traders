@@ -33,6 +33,7 @@
       return {
         posts: [],
         auth: auth,
+        user: auth.user,
       };
     },
 
@@ -48,15 +49,26 @@
 
     mounted() {
       this.getPosts();
+      window.unload = auth.signout();
     },
 
     methods: {
       getPosts() {
-        axios.get('/api/elephpants').then(response => {
-          this.posts = response.data.data;
-        }).catch(error => {
-          console.log(error);
-        });
+        let token = localStorage.getItem('id_token');
+
+        if (token !== null) {
+          axios.get('/api/elephpants?token=' + token).then(response => {
+            this.posts = response.data.data;
+          }).catch(error => {
+            console.log(error);
+          });
+        } else {
+          axios.get('/api/elephpants').then(response => {
+            this.posts = response.data.data;
+          }).catch(error => {
+            console.log(error);
+          });
+        }
       },
     },
 

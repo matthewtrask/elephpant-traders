@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Api\PostTransformer;
+use App\Api\WantedTransformer;
 use App\User;
 use League\Fractal\TransformerAbstract;
 
@@ -17,6 +18,7 @@ class SellerTransformer extends TransformerAbstract
 {
     protected $availableIncludes  = [
         'posts',
+        'wishlist',
     ];
 
     public function transform(User $user)
@@ -33,6 +35,11 @@ class SellerTransformer extends TransformerAbstract
     public function includePosts(User $user)
     {
         return $this->collection($user->posts, new PostTransformer());
+    }
+
+    public function includeWishlist(User $user)
+    {
+        return $this->collection($user->wishlist, new WantedTransformer());
     }
 
     private function image($user)

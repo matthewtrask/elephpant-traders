@@ -10,6 +10,13 @@
         color: #fff;
       }
     }
+
+    a.twitter {
+        color: #1f648b;
+        &:hover {
+            color: #1f648b;
+        }
+    }
 </style>
 <template>
     <div>
@@ -20,9 +27,10 @@
             </div>
             <div class="col-sm-12 col-md-8">
                 <h3 class="text-right">Profile Information</h3>
-                <p class="text-right"><a  v-bind:href="'https://twitter.com/' + user.profile.twitter">@{{ user.profile.twitter }}</a></p>
+                <p class="text-right"><a  v-bind:href="'https://twitter.com/' + user.profile.twitter" class="twitter">@{{ user.profile.twitter }}</a></p>
                 <p class="text-right">Elephpants posted: {{ user.profile.elephpantCount }}</p>
-                <p class="text-right"><button class="btn btn-success"><router-link to="/profile/elephpant/post">Add Elepahant</router-link></button></p>
+                <p class="text-right"><button class="btn btn-success"><router-link tag="a" to="/profile/elephpant/post">Add Elephpant</router-link></button></p>
+                <p class="text-right"><button class="btn btn-success"><router-link tag="a" to="/profile/elephpant/wishlist">Edit Wishlist</router-link></button></p>
             </div>
         </div>
         <hr>
