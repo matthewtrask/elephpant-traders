@@ -33,24 +33,41 @@
 
   export default {
     created() {
-      axios.get(`/api/elephpants/post/${this.$route.params.id}`).then(response => {
-        this.post = response.data.data[0];
-      }).catch(error => {
-        console.error(error);
-      });
+      return auth.check();
     },
 
     data() {
       return {
         post: '',
         wanted: [],
+        auth: auth,
+        user: auth.user,
       };
+    },
+
+    mounted() {
+      this.getPost();
+      window.unload = this.logout;
     },
 
     watch: {
       post(post) {
         this.wanted = this.post.wanted.data;
       }
+    },
+
+    methods: {
+      getPost() {
+        axios.get(`/api/elephpants/post/${this.$route.params.id}`).then(response => {
+          this.post = response.data.data[0];
+        }).catch(error => {
+          console.error(error);
+        });
+      },
+
+      logout() {
+        return auth.signout();
+      },
     },
 
     filters: {

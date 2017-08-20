@@ -39,6 +39,8 @@ class SellersController extends Controller
     {
         $data = $this->repository->fetch($request->id);
 
-        return $this->response->setContent(fractal($data)->transformWith($this->transformer)->includePosts()->toArray());
+        return $this->response->setContent(
+            fractal($data)->transformWith($this->transformer)->includePosts()->includeWishlist()->toArray()
+        );
     }
 }

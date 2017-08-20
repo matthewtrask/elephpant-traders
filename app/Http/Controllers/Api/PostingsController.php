@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Api\PostTransformer;
-use App\Http\Requests\Api\ElephpantRequest;
 use App\Http\Requests\Api\PostRequest;
-use App\Http\Requests\Api\RemoveElephpantRequest;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class PostingsController extends Controller
 {
@@ -39,8 +39,13 @@ class PostingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('token') && !is_null($request->token)) {
+            $user = User::findByEmail(JWTAuth::parseToken()->toUser()->email)->first();
+            \Auth::setUser($user);
+        }
+
         $listings = $this->repository->get();
 
         return $this->response->setContent(fractal($listings)->transformWith($this->transformer)->toArray());

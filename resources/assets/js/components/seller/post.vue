@@ -58,6 +58,7 @@
         description: '',
         image: '',
         showSuccess: false,
+        token: '',
       };
     },
 
@@ -65,9 +66,13 @@
       return auth.check();
     },
 
+    ready() {
+      this.token = localStorage.getItem('id_token');
+    },
+
     methods: {
       upload() {
-        axios.post('/api/elephpants', {
+        axios.post('/api/elephpants?token=' + this.token, {
           title: this.title,
           description: this.description,
           image: this.image,

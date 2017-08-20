@@ -17,6 +17,12 @@ footer {
   bottom: 0;
   height: 100px;
   left: 0;
-  position: absolute;
+  position: relative;
   width: 100%;
+  a {
+    color: #1f648b;
+    &:hover {
+      color: #1f648b;
+    }
+  }
 }

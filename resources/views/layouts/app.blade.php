@@ -80,5 +80,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="//use.fontawesome.com/8213b5e9ce.js"></script>
 </body>
 </html>

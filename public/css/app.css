@@ -8359,7 +8359,15 @@ footer {
   bottom: 0;
   height: 100px;
   left: 0;
-  position: absolute;
+  position: relative;
   width: 100%;
+}
+
+footer a {
+  color: #1f648b;
+}
+
+footer a:hover {
+  color: #1f648b;
 }
 
