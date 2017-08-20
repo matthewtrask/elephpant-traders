@@ -49,7 +49,6 @@
 
     mounted() {
       this.getPosts();
-      window.unload = auth.signout();
     },
 
     methods: {

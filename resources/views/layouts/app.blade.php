@@ -38,8 +38,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><router-link to="login">Login</router-link></li>
-                            <li><router-link to="register">Register</router-link></li>
+                            <li><router-link :to="{ path: 'login' }">Login</router-link></li>
+                            <li><router-link :to="{ path: 'register' }">Register</router-link></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
