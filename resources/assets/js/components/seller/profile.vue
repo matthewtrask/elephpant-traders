@@ -11,7 +11,7 @@
       }
     }
 
-    a.twitter {
+    a.twitter, a.trade {
         color: #1f648b;
         &:hover {
             color: #1f648b;
@@ -31,6 +31,35 @@
                 <p class="text-right">Elephpants posted: {{ user.profile.elephpantCount }}</p>
                 <p class="text-right"><button class="btn btn-success"><router-link tag="a" to="/profile/elephpant/post">Add Elephpant</router-link></button></p>
                 <p class="text-right"><button class="btn btn-success"><router-link tag="a" to="/profile/elephpant/wishlist">Edit Wishlist</router-link></button></p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Elephpant</th>
+                        <th>Buyer</th>
+                        <th>Approved</th>
+                        <th>Received</th>
+                        <th>Approved At</th>
+                        <th>Approve</th>
+                        <th>Decline</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="trade in user.profile.trades.data">
+                        <td>{{ trade.elephpant }}</td>
+                        <td>{{ trade.buyer }}</td>
+                        <td>{{ trade.approved }}</td>
+                        <td>{{ trade.received }}</td>
+                        <td>{{ trade.approvedAt }}</td>
+                        <td><a class="trade" href="" @click.prevent="approveTrade(trade.id)">Approve</a></td>
+                        <td><a class="trade" href="" @click.prevent="declineTrade(trade.id)">Decline</a></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <hr>
@@ -80,6 +109,22 @@
           auth.check();
         }).catch(error => {
           console.error(error);
+        });
+      },
+
+      approveTrade(tradeId) {
+        axios.put('/api/elephpants/trade', { postId: tradeId, sellerId: this.user.profile.id }).then(response => {
+          return auth.check();
+        }).catch(error => {
+          console.log(error);
+        })
+      },
+
+      declineTrade(tradeId) {
+        axios.delete('/api/elephpants/trade', { postId: tradeId, sellerId: this.user.profile.id }).then(response => {
+          return auth.check();
+        }).catch(error => {
+          console.log(error);
         });
       },
     },

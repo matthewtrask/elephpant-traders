@@ -13,12 +13,17 @@ class Trade extends Model
 
     public function seller() : BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'seller_id');
+        return $this->belongsTo(User::class, 'seller_id', 'id');
     }
 
     public function buyer() : BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'buyer_id');
+        return $this->belongsTo(User::class, 'buyer_id', 'id');
+    }
+
+    public function elephpant()
+    {
+        return $this->belongsTo(Post::class, 'post_id', 'id');
     }
 
     public function scopeAccepted(Builder $query) : Builder

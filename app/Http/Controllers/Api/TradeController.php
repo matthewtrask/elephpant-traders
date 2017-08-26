@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\SendTradeEmail;
 use App\Http\Requests\Api\TradeRequest;
 use App\Repositories\TradeRepository;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TradeController extends Controller
@@ -34,8 +36,27 @@ class TradeController extends Controller
 
         \Auth::setUser($user);
 
-        $this->repository->create($request, $user);
+        $tradeId = $this->repository->create($request, $user);
+
+        $this->sendTradeEmail($tradeId);
 
         return $this->response->setStatusCode(201)->setContent('Trade initiated!');
+    }
+
+    public function edit(TradeRequest $request)
+    {
+        $this->repository->approveTrade($request->getPostId());
+
+        return $this->response->setStatusCode(204)->setContent('Trade Approved!');
+    }
+
+    public function delete(TradeRequest $request)
+    {
+
+    }
+
+    private function sendTradeEmail($tradeId)
+    {
+        event(new SendTradeEmail($tradeId));
     }
 }

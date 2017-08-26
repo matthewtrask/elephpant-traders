@@ -39,6 +39,12 @@ class UsersController extends Controller
         Auth::setUser($request->user());
         $data = $this->repository->fetch($request->user()->userId());
 
-        return $this->response->setContent(fractal($data)->transformWith($this->transformer)->includePosts()->includeWishlist()->toArray());
+        return $this->response->setContent(
+            fractal($data)->transformWith($this->transformer)
+                ->includePosts()
+                ->includeWishlist()
+                ->includeTrades()
+                ->toArray()
+        );
     }
 }

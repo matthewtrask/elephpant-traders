@@ -22,6 +22,7 @@ Route::post('elephpants', ['uses' => 'Api\PostingsController@create']);
 Route::post('elephpants/wishlist', ['uses' => 'Api\WishlistController@create']);
 Route::delete('elephpants/wishlist/{id}', ['uses' => 'Api\WishlistController@destroy'])->where('id', '[0-9]+');
 Route::post('elephpants/trade', ['uses' => 'Api\TradeController@create']);
+Route::put('elephpants/trade', ['uses' => 'Api\TradeController@edit']);
 
 Route::post('register', ['uses' => 'Api\AuthController@register']);
 Route::post('login', ['uses' => 'Api\AuthController@create']);

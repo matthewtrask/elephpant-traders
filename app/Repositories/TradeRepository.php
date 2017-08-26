@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: trask
- * Date: 8/20/17
- * Time: 11:13 AM
- */
 
 namespace App\Repositories;
 
-
 use App\Models\Trade;
+use Carbon\Carbon;
 
 class TradeRepository
 {
@@ -48,6 +42,16 @@ class TradeRepository
         $trade->received = 0;
         $trade->accepted_at = null;
 
-        return $trade->save();
+        $trade->save();
+
+        return $trade->id;
+    }
+
+    public function approveTrade($postId)
+    {
+        $trade = $this->trade->find($postId)->first();
+        $trade->accepted_at = Carbon::now();
+        $trade->accepted = 1;
+        $trade->save();
     }
 }
