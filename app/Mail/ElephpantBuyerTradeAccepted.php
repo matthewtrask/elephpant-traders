@@ -6,9 +6,8 @@ use App\Models\Trade;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TradeAccepted extends Mailable
+class ElephpantBuyerTradeAccepted extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -26,6 +25,6 @@ class TradeAccepted extends Mailable
      */
     public function build()
     {
-        return $this->from('trade@elephpanttrade.com')->view('emails.trade-accepted');
+        return $this->from('trade@elephpanttrade.com')->markdown('emails.trade-buyer-accepted');
     }
 }

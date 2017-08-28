@@ -56,7 +56,7 @@ class User extends Authenticatable
         return $this->hasMany(Wanted::class, 'seller_id', 'id');
     }
 
-    public function trades()
+    public function postings()
     {
         return $this->hasMany(Trade::class, 'seller_id', 'id');
     }

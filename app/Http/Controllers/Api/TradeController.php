@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\SendAcceptedEmail;
 use App\Events\SendTradeEmail;
 use App\Http\Requests\Api\TradeRequest;
 use App\Repositories\TradeRepository;
@@ -45,7 +46,9 @@ class TradeController extends Controller
 
     public function edit(TradeRequest $request)
     {
-        $this->repository->approveTrade($request->getPostId());
+        $postId = $this->repository->approveTrade($request->getPostId());
+
+        $this->sendAcceptanceEmails($postId);
 
         return $this->response->setStatusCode(204)->setContent('Trade Approved!');
     }
@@ -58,5 +61,10 @@ class TradeController extends Controller
     private function sendTradeEmail($tradeId)
     {
         event(new SendTradeEmail($tradeId));
+    }
+
+    private function sendAcceptanceEmails($postId)
+    {
+        event(new SendAcceptedEmail($postId));
     }
 }

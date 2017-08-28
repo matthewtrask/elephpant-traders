@@ -47,11 +47,12 @@ class TradeRepository
         return $trade->id;
     }
 
-    public function approveTrade($postId)
+    public function approveTrade($tradeId)
     {
-        $trade = $this->trade->find($postId)->first();
+        $trade = $this->trade->find($tradeId);
         $trade->accepted_at = Carbon::now();
         $trade->accepted = 1;
-        $trade->save();
+
+        return $trade->save();
     }
 }

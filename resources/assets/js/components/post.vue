@@ -97,7 +97,7 @@
 
       initiateTrade() {
         let token = localStorage.getItem('id_token');
-        console.log(token);
+
         if (!token) {
           this.showLoginAlert = true;
 
@@ -108,7 +108,7 @@
 
         axios.post('/api/elephpants/trade?token=' + token, {
           postId: this.post.id,
-          sellerId: this.user.profile.id,
+          sellerId: this.post.sellerId,
           token: token,
         }).then(response => {
           this.showSuccessAlert = true;

@@ -16,23 +16,23 @@ class SendAcceptedEmail
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var Post
+     * @var int
      */
-    private $post;
+    private $tradeId;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Post $post)
+    public function __construct(int $tradeId)
     {
-        $this->post = $post;
+        $this->tradeId = $tradeId;
     }
 
-    public function post()
+    public function tradeId()
     {
-        return $this->post;
+        return $this->tradeId;
     }
 
     /**

@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendThreadEmailHandler
+class SendTradeEmailHandler
 {
 
     /**
@@ -25,7 +25,7 @@ class SendThreadEmailHandler
 
     private function sendEmail($event)
     {
-        $trade = Trade::find($event->tradeId())->first();
+        $trade = Trade::find($event->tradeId());
 
         Mail::to($trade->seller->email)->send(new ElephpantTradeOffer($trade));
     }

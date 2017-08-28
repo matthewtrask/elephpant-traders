@@ -50,4 +50,9 @@ class Trade extends Model
     {
         return $query->where('accepted_at', '=', null);
     }
+
+    public function scopeByPostId($query, int $postId)
+    {
+        return $query->where('post_id', $postId);
+    }
 }

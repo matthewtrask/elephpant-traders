@@ -46,7 +46,7 @@ class SellerTransformer extends TransformerAbstract
 
     public function includeTrades(User $user)
     {
-        return $this->collection($user->trades, new TradeTransformer());
+        return $this->collection($user->postings, new TradeTransformer());
     }
 
     private function image($user)

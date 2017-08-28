@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\SendAcceptedEmail;
 use App\Events\SendTradeEmail;
-use App\Listeners\SendThreadEmailHandler;
+use App\Listeners\SendAcceptanceEmailHandler;
+use App\Listeners\SendTradeEmailHandler;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -16,8 +18,11 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         SendTradeEmail::class => [
-            SendThreadEmailHandler::class
+            SendTradeEmailHandler::class
         ],
+        SendAcceptedEmail::class => [
+            SendAcceptanceEmailHandler::class
+        ]
     ];
 
     /**
