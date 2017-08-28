@@ -51,7 +51,7 @@ class SellerTransformer extends TransformerAbstract
 
     private function image($user)
     {
-        if ($user->image === '') {
+        if ($user->image === '' || is_null($user->image)) {
             $user->image = '/img/default_user.png';
         }
 
