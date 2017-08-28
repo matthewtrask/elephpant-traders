@@ -36,6 +36,7 @@ class TradeRepository
     {
         $trade = new Trade();
         $trade->post_id = $data->getPostId();
+        $trade->status = 'pending';
         $trade->seller_id = $data->getSellerId();
         $trade->buyer_id = $user->userId();
         $trade->accepted = 0;
@@ -51,7 +52,16 @@ class TradeRepository
     {
         $trade = $this->trade->find($tradeId);
         $trade->accepted_at = Carbon::now();
+        $trade->status = 'accepted';
         $trade->accepted = 1;
+
+        return $trade->save();
+    }
+
+    public function declineTrade($tradeId)
+    {
+        $trade = $this->trade->find($tradeId);
+        $trade->status = 'declined';
 
         return $trade->save();
     }

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Events\SendAcceptedEmail;
+use App\Events\SendDeclineEmail;
 use App\Events\SendTradeEmail;
 use App\Listeners\SendAcceptanceEmailHandler;
+use App\Listeners\SendDeclineEmailHandler;
 use App\Listeners\SendTradeEmailHandler;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         SendAcceptedEmail::class => [
             SendAcceptanceEmailHandler::class
+        ],
+        SendDeclineEmail::class => [
+            SendDeclineEmailHandler::class,
         ]
     ];
 

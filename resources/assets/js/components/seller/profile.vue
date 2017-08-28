@@ -17,6 +17,20 @@
             color: #1f648b;
         }
     }
+
+    .pending {
+        color: yellow;
+    }
+
+    .declined {
+        color: red;
+
+    }
+
+    .accepted {
+        color: green;
+
+    }
 </style>
 <template>
     <div>
@@ -39,9 +53,9 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
+                        <th>Status</th>
                         <th>Elephpant</th>
                         <th>Buyer</th>
-                        <th>Approved</th>
                         <th>Received</th>
                         <th>Approved At</th>
                         <th>Approve</th>
@@ -50,9 +64,9 @@
                     </thead>
                     <tbody>
                     <tr v-for="trade in user.profile.trades.data">
+                        <td><i class="fa fa-circle" v-bind:class="{ 'pending': trade.status === 'pending', 'accepted': trade.status === 'accepted', 'declined': trade.status === 'declined' }"></i></td>
                         <td>{{ trade.elephpant }}</td>
                         <td>{{ trade.buyer }}</td>
-                        <td>{{ trade.approved }}</td>
                         <td>{{ trade.received }}</td>
                         <td>{{ trade.approvedAt }}</td>
                         <td><a class="trade" href="" @click.prevent="approveTrade(trade.id)">Approve</a></td>
@@ -121,7 +135,7 @@
       },
 
       declineTrade(tradeId) {
-        axios.delete('/api/elephpants/trade', { postId: tradeId, sellerId: this.user.profile.id }).then(response => {
+        axios.delete(`/api/elephpants/trade/${tradeId}`).then(response => {
           return auth.check();
         }).catch(error => {
           console.log(error);

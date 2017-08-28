@@ -13,6 +13,7 @@ class TradeTransformer extends TransformerAbstract
             'id' => $trade->id,
             'elephpant' => $trade->elephpant->title,
             'buyer' => $trade->buyer->name,
+            'status' => $trade->status,
             'approved' => $trade->accepted ? 'Yes' : 'No',
             'received' => $trade->received ? 'Yes' : 'No',
             'approvedAt' => $trade->accepted_at,

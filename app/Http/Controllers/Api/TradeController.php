@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\SendAcceptedEmail;
+use App\Events\SendDeclineEmail;
 use App\Events\SendTradeEmail;
 use App\Http\Requests\Api\TradeRequest;
 use App\Repositories\TradeRepository;
@@ -53,9 +54,13 @@ class TradeController extends Controller
         return $this->response->setStatusCode(204)->setContent('Trade Approved!');
     }
 
-    public function delete(TradeRequest $request)
+    public function destroy(Request $request)
     {
+        $this->repository->declineTrade($request->tradeId);
 
+        $this->sendDeclineEmail($request->tradeId);
+
+        return $this->response->setStatusCode(200)->setContent('Trade was declined');
     }
 
     private function sendTradeEmail($tradeId)
@@ -66,5 +71,10 @@ class TradeController extends Controller
     private function sendAcceptanceEmails($postId)
     {
         event(new SendAcceptedEmail($postId));
+    }
+
+    private function sendDeclineEmail($postId)
+    {
+        event(new SendDeclineEmail($postId));
     }
 }
