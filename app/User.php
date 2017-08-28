@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Post;
+use App\Models\Trade;
 use App\Models\Wanted;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function wishlist() : HasMany
     {
         return $this->hasMany(Wanted::class, 'seller_id', 'id');
+    }
+
+    public function postings()
+    {
+        return $this->hasMany(Trade::class, 'seller_id', 'id');
     }
 }
