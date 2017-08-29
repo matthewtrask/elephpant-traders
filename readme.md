@@ -6,7 +6,7 @@ This is a WIP, yo.
 
 ### Prerequesites 
 
-You must have Vagrant, Composer, NPM, and Yarn available to use on your machine.
+You must have Vagrant 1.9.0+, PHP 7, Composer, NodeJS 6+, NPM, and Yarn available to use on your machine.
 
 
 ### Getting up and running
