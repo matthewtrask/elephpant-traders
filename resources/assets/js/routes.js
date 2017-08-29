@@ -1,5 +1,6 @@
 import VueRouter from 'vue-router';
 import HomeComponent from './components/home.vue';
+import AboutComponent from './components/about.vue';
 import PostComponent from './components/post.vue';
 import SellerComponent from './components/seller.vue';
 import ProfileComponent from './components/seller/profile.vue';
@@ -15,6 +16,11 @@ const routes = [
     path: '/',
     component: HomeComponent,
     name: 'HomeComponent',
+  },
+  {
+    path: '/about',
+    component: AboutComponent,
+    name: 'AboutComponent',
   },
   {
     path: '/posts/:id',
