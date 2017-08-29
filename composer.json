@@ -16,6 +16,7 @@
         "league/commonmark": "^0.11",
         "league/flysystem-aws-s3-v3": "~1.0",
         "spatie/laravel-fractal": "^4.3",
+        "spatie/laravel-sitemap": "^2.4",
         "tymon/jwt-auth": "^0.5.12"
     },
     "require-dev": {
