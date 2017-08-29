@@ -8,6 +8,7 @@
         "php": ">=5.6.4",
         "aws/aws-sdk-php": "^3.32",
         "barryvdh/laravel-ide-helper": "^2.4",
+        "doctrine/dbal": "^2.6",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.4.*",
         "laravel/homestead": "^6.0",
