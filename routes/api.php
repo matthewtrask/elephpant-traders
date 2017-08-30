@@ -28,6 +28,23 @@ Route::delete('elephpants/trade/{tradeId}', ['uses' => 'Api\TradeController@dest
 Route::post('register', ['uses' => 'Api\AuthController@register']);
 Route::post('login', ['uses' => 'Api\AuthController@create']);
 
+
+/* Socialite Routes */
+
+// Facebook Route
+Route::get('login/facebook', ['uses' => 'Api\AuthController@redirectToFacebook']);
+Route::get('login/facebook/callback', ['uses' =>'Api\AuthController@handleFacebookCallback']);
+
+//Twitter Route
+Route::get('login/twitter', ['uses' =>'Api\AuthController@redirectToTwitter']);
+Route::get('login/twitter/callback',['uses' => 'Api\AuthController@handleTwitterCallback']);
+
+//Github Route
+Route::get('login/github', ['uses' =>'Api\AuthController@redirectToGithub']);
+Route::get('login/github/callback', ['uses' =>'Api\AuthController@handleGithubCallback']);
+
+
+
 Route::group(['middleware' => 'jwt.auth'], function() {
     Route::get('user', ['uses' => 'Api\UsersController@show']);
 });

@@ -35,4 +35,22 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+    'client_id' => 'your-facebook-app-id',      //To be added by admin
+    'client_secret' => 'your-facebook-app-secret',  //To be added by admin
+    'redirect' => 'http://elephpanttraders.com/#/login/facebook/callback',
+    ],
+    
+    'twitter' => [
+    'client_id' => 'your-twitter-app-id',
+    'client_secret' => 'your-twiter-app-secret',
+    'redirect' => 'http://elephpanttraders.com/#/login/twitter/callback',
+    ],
+
+    'github' => [
+    'client_id' => 'your-github-app-id',  //To be added by admin
+    'client_secret' => 'your-github-app-secret',  //To be added by admin
+    'redirect' => 'http://elephpanttraders.com/#/login/github/callback',
+    ],
+
 ];
