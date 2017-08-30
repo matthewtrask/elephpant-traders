@@ -32,7 +32,7 @@ class UserRepository
         $user = new User();
         $user->name = $data->getName();
         $user->email = $data->getEmail();
-        $user->twitter = $data->getTwitter();
+        $user->twitter = ltrim($data->getTwitter(), '@');
         $user->password = bcrypt($data->getPassword());
 
         return $user->save();

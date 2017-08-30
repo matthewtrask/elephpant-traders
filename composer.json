@@ -8,6 +8,7 @@
         "php": ">=5.6.4",
         "aws/aws-sdk-php": "^3.32",
         "barryvdh/laravel-ide-helper": "^2.4",
+        "doctrine/dbal": "^2.6",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.4.*",
         "laravel/homestead": "^6.0",
@@ -16,6 +17,7 @@
         "league/commonmark": "^0.11",
         "league/flysystem-aws-s3-v3": "~1.0",
         "spatie/laravel-fractal": "^4.3",
+        "spatie/laravel-sitemap": "^2.4",
         "tymon/jwt-auth": "^0.5.12"
     },
     "require-dev": {
