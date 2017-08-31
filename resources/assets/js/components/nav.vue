@@ -1,0 +1,60 @@
+<style lang='scss'>
+
+</style>
+<template>
+    <div>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="/">
+                        Elephpant Trade
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        <li v-if="!this.user"><a href="/#/login"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                             Login</a></li>
+                        <li v-if="!this.user"><a href="/#/register"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                             Register</a></li>
+                        <li class="dropdown" v-if="this.user">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ user.profile.name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/#/profile"><i class="fa fa-user" aria-hidden="true"></i>
+                                     Profile</a></li>
+                                <li>
+                                    <a href="/#/logout">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                         Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</template>
+<script>
+  import axios from 'axios';
+
+  export default {
+    props: ['user'],
+  };
+</script>

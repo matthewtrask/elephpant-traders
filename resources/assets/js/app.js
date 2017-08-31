@@ -2,6 +2,7 @@ window._ = require('lodash');
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
+import VueMeta from 'vue-meta';
 import Axios from 'axios';
 import router from './routes.js';
 import auth from './auth.js';
@@ -14,6 +15,7 @@ try {
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.use(VueMeta);
 window.vue = Vue;
 window.axios = Axios;
 

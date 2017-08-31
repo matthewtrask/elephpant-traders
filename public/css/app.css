@@ -8359,7 +8359,7 @@ footer {
   bottom: 0;
   height: 100px;
   left: 0;
-  position: relative;
+  position: absolute;
   width: 100%;
 }
 
