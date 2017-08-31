@@ -14,6 +14,9 @@
                     <div class="alert alert-danger" v-if="showErrorMessage">
                         <p class="text-center">There was an error logging you in. Please try again.</p>
                     </div>
+                    <div class="alert alert-success" v-if="showErrorMessage">
+                        <p class="text-center">Thanks for registering! Time to log in and get trading!</p>
+                    </div>
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
