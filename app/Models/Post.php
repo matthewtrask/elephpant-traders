@@ -5,6 +5,7 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 
@@ -21,13 +22,13 @@ class Post extends Model
         return $this->belongsTo(User::class, 'seller_id', 'id');
     }
 
-    public function wanted()
+    public function wanted() : HasMany
     {
         return $this->hasMany(Wanted::class, 'seller_id', 'seller_id');
     }
 
     public function scopeById($query, int $id)
     {
-       return $query->where('id', $id);
+        return $query->where('id', $id);
     }
 }

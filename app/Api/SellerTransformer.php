@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\Api;
 
-
 use App\Api\PostTransformer;
 use App\Api\TradeTransformer;
 use App\Api\WantedTransformer;

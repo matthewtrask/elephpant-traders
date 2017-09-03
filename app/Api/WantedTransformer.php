@@ -21,12 +21,12 @@ class WantedTransformer extends TransformerAbstract
     private function desireLevel($level)
     {
         if ($level === 1) {
-           return 'Meh';
-        } else if ($level === 2) {
+            return 'Meh';
+        } elseif ($level === 2) {
             return 'Mild';
-        } else if ($level === 3) {
+        } elseif ($level === 3) {
             return 'Interested';
-        } else if ($level === 4) {
+        } elseif ($level === 4) {
             return 'Definitely';
         } else {
             return 'Absolutely';
