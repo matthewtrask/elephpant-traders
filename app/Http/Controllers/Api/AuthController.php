@@ -46,7 +46,6 @@ class AuthController extends Controller
                     'exp' => Carbon::now()->addWeek()->timestamp,
                 ]);
             }
-
         } catch (JWTException $e) {
             return response()->json([
                 'error' => 'Could not authenticate',
@@ -66,10 +65,5 @@ class AuthController extends Controller
                 'meta' => $meta
             ]);
         }
-    }
-
-    public function destroy()
-    {
-
     }
 }

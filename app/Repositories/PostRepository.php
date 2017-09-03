@@ -39,11 +39,6 @@ class PostRepository
         return $post->save();
     }
 
-    public function update($data)
-    {
-
-    }
-
     public function destroy(int $id)
     {
         $post = $this->post->find($id);
