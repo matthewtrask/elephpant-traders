@@ -76,7 +76,9 @@
 
     methods: {
       upload() {
-        axios.post('/api/elephpants?token=' + this.token, {
+        let token = localStorage.getItem('id_token');
+
+        axios.post('/api/elephpants?token=' + token, {
           title: this.title,
           description: this.description,
           image: this.image,

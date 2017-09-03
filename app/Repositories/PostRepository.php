@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\MarkdownService;
 
 class PostRepository
 {
@@ -12,9 +13,15 @@ class PostRepository
      */
     private $post;
 
-    public function __construct(Post $post)
+    /**
+     *
+     */
+    private $service;
+
+    public function __construct(Post $post, MarkdownService $service)
     {
         $this->post = $post;
+        $this->service = $service;
     }
 
     public function get() : Collection
@@ -32,8 +39,8 @@ class PostRepository
         $post = new Post();
 
         $post->title = $data->getTitle();
-        $post->description = $data->getDescription();
         $post->seller_id = $data->getUserId();
+        $post->description = $this->service->convertMarkdown($data->getDescription());
         $post->image_link = $data->getImageUrl();
 
         return $post->save();
