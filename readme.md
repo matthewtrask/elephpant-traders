@@ -1,6 +1,6 @@
 # Elephpant Traders
 
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](github.com/matthewtrask/elephpant-traders)
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](github.com/matthewtrask/elephpant-traders) [![Code Climate](https://img.shields.io/codeclimate/github/kabisaict/flow.svg)](github.com/matthewtrask/elephpant-traders)
 
 Code behind elephpanttraders.com. 
 
