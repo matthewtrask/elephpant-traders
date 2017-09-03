@@ -1,5 +1,7 @@
 # Elephpant Traders
 
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](github.com/matthewtrask/elephpant-traders)
+
 Code behind elephpanttraders.com. 
 
 This is a WIP, yo.
