@@ -14,7 +14,7 @@ class PostRepository
     private $post;
 
     /**
-     *
+     * @var MarkdownService
      */
     private $service;
 
