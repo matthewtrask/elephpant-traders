@@ -30,11 +30,6 @@ class SellersController extends Controller
         $this->transformer = $transformer;
     }
 
-    public function create()
-    {
-
-    }
-
     public function show(Request $request)
     {
         $data = $this->repository->fetch($request->id);

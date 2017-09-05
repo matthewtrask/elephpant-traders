@@ -12,7 +12,7 @@ class UserRepository
      */
     private $user;
 
-    public function _construct(User $user)
+    public function __construct(User $user)
     {
         $this->user = $user;
     }
@@ -36,15 +36,5 @@ class UserRepository
         $user->password = bcrypt($data->getPassword());
 
         return $user->save();
-    }
-
-    public function edit($data)
-    {
-
-    }
-
-    public function destroy(int $id)
-    {
-
     }
 }

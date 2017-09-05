@@ -1,24 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: trask
- * Date: 8/7/17
- * Time: 10:58 PM
- */
 
 namespace App\Services;
 
-
 use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\DocParser;
+use League\CommonMark\Environment;
+use League\CommonMark\HtmlRenderer;
 
 class MarkdownService
 {
-    public function convertMarkdown(string $post) : CommonMarkConverter
+    public function convertMarkdown(string $post)
     {
-        $html = new CommonMarkConverter();
+        $environment = Environment::createCommonMarkEnvironment();
 
-        $html->convertToHtml($post);
+        $parser = new DocParser($environment);
 
-        return $html;
+        $htmlRenderer = new HtmlRenderer($environment);
+
+        $document = $parser->parse($post);
+
+        return $htmlRenderer->renderBlock($document);
     }
 }

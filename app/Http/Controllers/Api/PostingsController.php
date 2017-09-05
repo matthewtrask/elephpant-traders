@@ -60,7 +60,9 @@ class PostingsController extends Controller
     {
         $data = $this->repository->fetch($request->id);
 
-        return $this->response->setContent(fractal($data)->transformWith($this->transformer)->includeWanted()->toArray());
+        return $this->response->setContent(
+            fractal($data)->transformWith($this->transformer)->includeWanted()->toArray()
+        );
     }
 
     /**
@@ -82,7 +84,6 @@ class PostingsController extends Controller
         $post = $this->repository->create($request);
 
         return $this->response->setContent('Post was created');
-
     }
 
     /**
