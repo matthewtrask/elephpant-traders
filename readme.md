@@ -2,7 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](github.com/matthewtrask/elephpant-traders) [![Code Climate](https://img.shields.io/codeclimate/github/kabisaict/flow.svg)](github.com/matthewtrask/elephpant-traders)
 
-Code behind elephpanttraders.com. 
+Code behind elephpanttrade.com. 
 
 This is a WIP, yo.
 
