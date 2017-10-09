@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Controllers\Controller;
@@ -65,5 +66,67 @@ class AuthController extends Controller
                 'meta' => $meta
             ]);
         }
+    }
+
+     /*******Facebook Redirect and Handle Callback Methods*******/
+    public function redirectToFacebook(){
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Facebook.
+     *
+     * @return Response
+     */
+    public function handleFacebookCallback(){
+        $user = Socialite::driver('facebook')->user();
+
+        return $user->token;
+    }
+
+
+
+    /*******Twitter Redirect and Handle Callback Methods*******/
+    public function redirectToTwitter()
+    {
+        return Socialite::driver('twitter')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Twitter.
+     *
+     * @return Response
+     */
+    public function handleTwitterCallback()
+    {
+        $user = Socialite::driver('twitter')->user();
+
+        return $user->token;
+    }
+
+
+
+
+
+    /*******Github Redirect and Handle Callback Methods*******/
+    public function redirectToGithub()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleGithubCallback()
+    {
+        $user = Socialite::driver('github')->user();
+
+        return $user->token;
+    }
+    public function destroy()
+    {
+
     }
 }
