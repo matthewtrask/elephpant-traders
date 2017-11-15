@@ -30,11 +30,6 @@ class WishlistController extends Controller
 
     public function create(WishlistRequest $request)
     {
-        if ($request->has('token') && !is_null($request->token)) {
-            $user = User::findByEmail(JWTAuth::parseToken()->toUser()->email)->first();
-            \Auth::setUser($user);
-        }
-
         $this->repository->create($request, $user->userId());
 
         return $this->response->setContent('Elephpant added to wishlist');

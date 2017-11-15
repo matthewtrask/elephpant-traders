@@ -40,7 +40,7 @@ export default {
       password: password,
     }).then(response => {
       context.error = false;
-      localStorage.setItem('id_token', response.data.meta.token);
+      localStorage.setItem('id_token', response.data);
       window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
 
       this.user.authenticated = true;

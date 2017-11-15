@@ -54,6 +54,7 @@
 <script>
   import axios from 'axios';
   import auth from '../../auth';
+
   export default {
     data() {
       return {
@@ -75,6 +76,6 @@
         this.password = '';
         this.rememberMe = '';
       }
-    }
+    },
   }
 </script>

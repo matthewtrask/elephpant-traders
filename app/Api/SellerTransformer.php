@@ -6,7 +6,7 @@
  * Time: 3:09 PM
  */
 
-namespace App\Http\Controllers\Api;
+namespace App\Api;
 
 use App\Api\PostTransformer;
 use App\Api\TradeTransformer;

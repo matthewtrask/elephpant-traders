@@ -34,10 +34,6 @@ class TradeController extends Controller
 
     public function create(TradeRequest $request)
     {
-        $user = User::findByEmail(JWTAuth::parseToken()->toUser()->email)->first();
-
-        \Auth::setUser($user);
-
         $tradeId = $this->repository->create($request, $user);
 
         $this->sendTradeEmail($tradeId);

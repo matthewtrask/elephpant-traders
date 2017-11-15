@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Api\SellerTransformer;
 
 class UsersController extends Controller
 {
@@ -36,7 +35,6 @@ class UsersController extends Controller
 
     public function show(Request $request)
     {
-        Auth::setUser($request->user());
         $data = $this->repository->fetch($request->user()->userId());
 
         return $this->response->setContent(

@@ -41,10 +41,6 @@ class PostingsController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('token') && !is_null($request->token)) {
-            $user = User::findByEmail(JWTAuth::parseToken()->toUser()->email)->first();
-            \Auth::setUser($user);
-        }
 
         $listings = $this->repository->get();
 

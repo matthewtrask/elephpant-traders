@@ -27,7 +27,4 @@ Route::delete('elephpants/trade/{tradeId}', ['uses' => 'Api\TradeController@dest
 
 Route::post('register', ['uses' => 'Api\AuthController@register']);
 Route::post('login', ['uses' => 'Api\AuthController@create']);
-
-Route::group(['middleware' => 'jwt.auth'], function() {
-    Route::get('user', ['uses' => 'Api\UsersController@show']);
-});
+Route::get('user', ['uses' => 'Api\UsersController@show'])->middleware('api:auth');

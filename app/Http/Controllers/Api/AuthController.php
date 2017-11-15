@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Api\UserTransformer;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Controllers\Controller;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -24,10 +22,16 @@ class AuthController extends Controller
      */
     private $repository;
 
-    public function __construct(Response $response, UserRepository $repository)
+    /**
+     * @var UserTransformer
+     */
+    private $transformer;
+
+    public function __construct(Response $response, UserRepository $repository, UserTransformer $transformer)
     {
         $this->response = $response;
         $this->repository = $repository;
+        $this->transformer = $transformer;
     }
 
     public function register(RegisterRequest $request)
@@ -39,31 +43,10 @@ class AuthController extends Controller
 
     public function create(LoginRequest $request)
     {
-        try {
-            if (Auth::attempt(['email' => $request->getEmail(), 'password' => $request->getPassword()])) {
-                Auth::login(User::findByEmail($request->getEmail())->first(), true);
-                $token = JWTAuth::attempt($request->only('email', 'password'), [
-                    'exp' => Carbon::now()->addWeek()->timestamp,
-                ]);
-            }
-        } catch (JWTException $e) {
-            return response()->json([
-                'error' => 'Could not authenticate',
-            ], 500);
-        }
-        if (!$token) {
-            return response()->json([
-                'error' => 'Could not authenticate',
-            ], 401);
-        } else {
-            $data = [];
-            $meta = [];
-            $data['user'] = $request->user()->email();
-            $meta['token'] = $token;
-            return response()->json([
-                'data' => $data,
-                'meta' => $meta
-            ]);
-        }
+        $user = User::findByEmail($request->getEmail())->first();
+
+        $token = $user->createToken('ElephpantTrader')->accessToken;
+
+        return $this->response->setContent(fractal($token)->transformWith($this->transformer)->includeUser()->toArray());
     }
 }
