@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
-                    <h2>Add New Elephpant</h2>
+                    <h2 class="text-center">Add New Elephpant</h2>
                     <form method="post" class="form-horizontal" enctype="multipart/form-data" @submit.prevent="upload">
                         <div class="form-group">
                             <label for="postTitle" class="col-sm-2 control-label">Title</label>

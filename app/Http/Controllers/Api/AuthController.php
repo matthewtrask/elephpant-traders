@@ -47,6 +47,10 @@ class AuthController extends Controller
 
         $token = $user->createToken('ElephpantTrader')->accessToken;
 
-        return $this->response->setContent(fractal($token)->transformWith($this->transformer)->includeUser()->toArray());
+        return $this->response->setContent([
+            'token' => $token,
+            'user' => $user,
+            'posts' => $user->posts,
+        ]);
     }
 }

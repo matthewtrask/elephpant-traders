@@ -1,6 +1,6 @@
 <style lang='scss'>
   .thumbnail {
-    box-shadow: 5px 5px 2px #888888;
+      box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
   }
 </style>
 <template>

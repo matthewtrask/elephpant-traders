@@ -27,7 +27,7 @@ class ImageController extends Controller
 
     public function create(Request $request)
     {
-        $image = $request->elephpant->store(env('AWS_BUCKET'), 's3');
+        $image = $request->elephpant->store(env('AWS_BUCKET'), 's3', 'public');
 
         return $this->response->setContent($image);
     }

@@ -10,7 +10,12 @@ export default {
   check() {
     let token = localStorage.getItem('id_token');
     if (token !== null) {
-      axios.get('api/user?token=' + token).then(response => {
+
+      axios.get('api/user', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+      }).then(response => {
         this.user.authenticated = true;
         this.user.profile = response.data.data;
       });
@@ -28,6 +33,12 @@ export default {
       router.push({
         name: 'LoginComponent',
       });
+
+      router.push({
+        name: 'ProfileComponent'
+      }, response => {
+        context.error = true
+      });
     }, response => {
       context.response = response.data;
       context.error = true;
@@ -40,11 +51,12 @@ export default {
       password: password,
     }).then(response => {
       context.error = false;
-      localStorage.setItem('id_token', response.data);
+      localStorage.setItem('id_token', response.data.token);
       window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
 
       this.user.authenticated = true;
-      this.user.profile = response.data.data;
+      this.user.profile = response.data.user;
+      this.user.posts = response.data.posts;
 
       router.push({
         name: 'ProfileComponent'

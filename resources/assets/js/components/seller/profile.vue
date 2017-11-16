@@ -29,6 +29,10 @@
     .accepted {
         color: #4CAF50;
     }
+
+    .elephpant-image {
+        height: 24rem;
+    }
 </style>
 <template>
     <div>
@@ -86,7 +90,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-4" v-for="post in user.profile.posts.data">
                     <div class="thumbnail">
-                        <img :src="post.image" alt="...">
+                        <img class="elephpant-image" :src="post.image" alt="...">
                         <div class="caption">
                             <h3>{{ post.title }}</h3>
                             <p>Seller: {{ post.seller }}</p>
