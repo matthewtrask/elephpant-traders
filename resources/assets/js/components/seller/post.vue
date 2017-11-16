@@ -70,15 +70,14 @@
       return auth.check();
     },
 
-    ready() {
-      this.token = localStorage.getItem('id_token');
-    },
-
     methods: {
       upload() {
         let token = localStorage.getItem('id_token');
 
-        axios.post('/api/elephpants?token=' + token, {
+        axios.post('/api/elephpants', {
+          headers: {
+            'Authorization': 'Bearer ' + token,
+          },
           title: this.title,
           description: this.description,
           image: this.image,
