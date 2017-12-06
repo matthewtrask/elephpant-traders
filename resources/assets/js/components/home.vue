@@ -12,7 +12,17 @@
 
     .image {
         height: 35rem;
-        width: 22.5rem;
+        width: 225rem;
+    }
+
+    .thumbnail {
+        max-height: 60rem;
+
+    }
+
+    .info {
+        height: 5.5rem;
+        overflow: scroll;
     }
 </style>
 <template>
@@ -37,7 +47,6 @@
                             <h3>{{ post.title }}</h3>
                             <p>Seller: {{ post.seller }}</p>
                             <p>Posted: {{ post.posted | date }}</p>
-                            <p>{{ post.description }}</p>
                             <p>
                                 <a v-bind:href="'/#/posts/' + post.id"  class="btn btn-primary" role="button">View Post</a>
                                 <a v-bind:href="'/#/sellers/' + post.sellerId" class="btn btn-default" role="button">View Seller</a>
