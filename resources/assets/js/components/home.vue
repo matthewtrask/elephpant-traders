@@ -1,7 +1,19 @@
-<style lang='scss'>
+<style lang='scss' scoped>
   .thumbnail {
       box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
   }
+
+  a.link {
+    color: #1f648b;
+    &:hover {
+      color: #1f648b;
+    }
+  }
+
+    .image {
+        height: 35rem;
+        width: 22.5rem;
+    }
 </style>
 <template>
     <div>
@@ -12,14 +24,15 @@
                     <div class="page-header">
                         <h1>Elephpant Trade <small>{{ randomSubheading }}</small></h1>
                         <p>This is a community driven site aimed at helping people trade elephpants.</p>
-                        <p>For more information on the elephpants themselves, check out <a href="http://afieldguidetoelephpants.net/">A Field Guide To Elephpants</a></p>
+                        <p>For more information on the elephpants themselves, check out <a class="link" href="http://afieldguidetoelephpants.net/">A Field Guide To Elephpants</a></p>
+                        <p><a v-bind:href="'/#/login'">Sign In</a> or <a v-bind:href="'/#/register'">Register</a> to post an elephpant or make a trade!</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-md-4" v-for="post in orderedPosts">
                     <div class="thumbnail">
-                        <img :src="post.image" alt="...">
+                        <img class="image" :src="post.image" alt="...">
                         <div class="caption">
                             <h3>{{ post.title }}</h3>
                             <p>Seller: {{ post.seller }}</p>

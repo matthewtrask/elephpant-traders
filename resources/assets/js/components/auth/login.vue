@@ -40,8 +40,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-success">Submit</button>
-                                    <button class="btn btn-default" @click="emptyForm">Cancel</button>
+                                    <button class="btn btn-success btn-block">Submit</button>
+                                    <button class="btn btn-default btn-block" @click="emptyForm">Cancel</button>
                                 </div>
                             </form>
                         </div>
