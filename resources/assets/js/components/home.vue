@@ -16,13 +16,9 @@
     }
 
     .thumbnail {
-        max-height: 60rem;
+        min-height: 58rem;
+        max-height: 58rem;
 
-    }
-
-    .info {
-        height: 5.5rem;
-        overflow: scroll;
     }
 </style>
 <template>
