@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,5 +31,20 @@ class Post extends Model
     public function scopeById($query, int $id)
     {
         return $query->where('id', $id);
+    }
+
+    public function newPost() : bool
+    {
+        $week = new Carbon;
+
+        $week->subWeek()->toDateString();
+
+        $date = $this->created_at;
+
+        if ($date > $week) {
+            return true;
+        }
+
+        return false;
     }
 }
