@@ -16,9 +16,9 @@ class ElephpantRequest extends FormRequest
         return true;
     }
 
-    public function getId()
+    public function getImage()
     {
-        return $this->get('id');
+        return $this->get('image');
     }
 
     /**
@@ -29,7 +29,7 @@ class ElephpantRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|int',
+            'image' => 'required|image',
         ];
     }
 }

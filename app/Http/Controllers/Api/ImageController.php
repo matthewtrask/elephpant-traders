@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\ElephpantRequest;
 use App\Services\S3Service;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -25,9 +26,11 @@ class ImageController extends Controller
         $this->response = $response;
     }
 
-    public function create(Request $request)
+    public function create(ElephpantRequest $request)
     {
-        $image = $request->elephpant->store(env('AWS_BUCKET'), 's3', 'public');
+        $image = $request->image;
+
+        Storage::disk('s3')->put('elephpant', $image);
 
         return $this->response->setContent($image);
     }

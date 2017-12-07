@@ -23,16 +23,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Image</label>
+                            <label class="col-sm-2 control-label">Image: {{ image }}</label>
                             <div class="col-sm-10">
                                 <vue-core-image-upload
                                         :class="['btn', 'btn-success']"
                                         :crop="false"
                                         @imageuploaded="imageuploaded"
-                                        inputOfFile="elephpant"
+                                        inputOfFile="image"
                                         :data="data"
                                         :max-file-size="5242880"
-                                        url="/api/elephpants/image" >
+                                        url="/api/elephpants/image">
                                 </vue-core-image-upload>
                             </div>
                         </div>
@@ -72,11 +72,9 @@
 
     methods: {
       upload() {
-        let token = localStorage.getItem('id_token');
-
         axios.post('/api/elephpants', {
           headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
           },
           title: this.title,
           description: this.description,
@@ -91,7 +89,7 @@
       },
 
       imageuploaded(res) {
-        this.image = res.split('/')[1];
+        this.image = res.data.src;
       },
     },
 
