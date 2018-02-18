@@ -50,7 +50,7 @@
 <script>
   import axios from 'axios';
   import { remove } from 'lodash';
-  import auth from '../../auth.js';
+  import auth from '../../js/auth.js';
   import EtNav from '../nav.vue';
   import Moment from 'moment';
 

@@ -63,7 +63,7 @@
 </template>
 <script>
   import axios from 'axios';
-  import auth from '../../auth';
+  import auth from '../../js/auth';
 
   export default {
 

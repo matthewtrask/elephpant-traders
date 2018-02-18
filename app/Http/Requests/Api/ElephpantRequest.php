@@ -18,7 +18,7 @@ class ElephpantRequest extends FormRequest
 
     public function getImage()
     {
-        return $this->get('image');
+        return $this->get('file');
     }
 
     /**

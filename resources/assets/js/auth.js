@@ -11,9 +11,9 @@ export default {
     let token = localStorage.getItem('id_token');
     if (token !== null) {
 
-      axios.get('api/user', {
+      axios.get('/api/user', {
         headers: {
-          'Authorization': 'Bearer ' + token
+          'Authorization': `Bearer ${token}`,
         },
       }).then(response => {
         this.user.authenticated = true;
@@ -35,7 +35,7 @@ export default {
       });
 
       router.push({
-        name: 'ProfileComponent'
+        name: 'LoginComponent'
       }, response => {
         context.error = true
       });
@@ -45,13 +45,17 @@ export default {
     });
   },
 
-  signin(context, email, password) {
-    axios.post('api/login', {
-      email: email,
+  signin(context, email, password, rememberMe) {
+    axios.post('/oauth/token', {
+      grant_type: 'password',
+      client_id: 2,
+      client_secret: 'cwX10cEUXvwpVp7SxFFB5n2TAJjsepbFIotv8UtH',
+      username: email,
       password: password,
+      rememberMe: rememberMe,
     }).then(response => {
       context.error = false;
-      localStorage.setItem('id_token', response.data.token);
+      localStorage.setItem('id_token', response.data.access_token);
       window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
 
       this.user.authenticated = true;
@@ -70,5 +74,6 @@ export default {
     localStorage.removeItem('id_token');
     this.user.authenticated = false;
     this.user.profile = null;
+    window.location.href = '/';
   },
 };

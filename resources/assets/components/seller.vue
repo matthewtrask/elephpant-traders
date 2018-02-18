@@ -23,8 +23,7 @@
                             <h3>{{ post.title }}</h3>
                             <p>Seller: {{ post.seller }}</p>
                             <p>Posted: {{ post.posted | date }}</p>
-                            <p>{{ post.description }}</p>
-                            <a v-bind:href="'/#/posts/' + post.id"  class="btn btn-success" role="button">View Post</a>
+                            <a v-bind:href="'/posts/' + post.id"  class="btn btn-success" role="button">View Post</a>
                         </div>
                     </div>
                 </div>
@@ -37,7 +36,7 @@
   import Moment from 'moment';
   import { orderBy } from 'lodash';
   import EtNav from './nav.vue';
-  import auth from './../auth.js';
+  import auth from '../js/auth.js';
 
   export default {
     created() {

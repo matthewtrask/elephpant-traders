@@ -25,20 +25,20 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        <li v-if="!this.user"><a href="/#/login"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                        <li v-if="!this.user.profile"><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>
                              Login</a></li>
-                        <li v-if="!this.user"><a href="/#/register"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                        <li v-if="!this.user.profile"><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>
                              Register</a></li>
-                        <li class="dropdown" v-if="this.user">
+                        <li class="dropdown" v-if="this.user.profile">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ user.profile.name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/#/profile"><i class="fa fa-user" aria-hidden="true"></i>
+                                <li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i>
                                      Profile</a></li>
                                 <li>
-                                    <a href="/#/logout">
+                                    <a href @click.prevent="logUserOut">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i>
                                          Logout
                                     </a>
@@ -53,8 +53,21 @@
 </template>
 <script>
   import axios from 'axios';
+  import auth from '../js/auth.js';
 
   export default {
+    methods: {
+      logUserOut() {
+        return auth.signout();
+      },
+    },
+
+    data() {
+      return {
+        auth: auth,
+      };
+    },
+
     props: ['user'],
   };
 </script>

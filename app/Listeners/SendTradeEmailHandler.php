@@ -5,13 +5,19 @@ namespace App\Listeners;
 use App\Events\SendTradeEmail;
 use App\Mail\ElephpantTradeOffer;
 use App\Models\Trade;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
 class SendTradeEmailHandler
 {
+    /**
+     * @var Trade
+     */
+    private $trade;
 
+    public function __construct(Trade $trade)
+    {
+        $this->trade = $trade;
+    }
     /**
      * Handle the event.
      *
@@ -25,7 +31,7 @@ class SendTradeEmailHandler
 
     private function sendEmail($event)
     {
-        $trade = Trade::find($event->tradeId());
+        $trade = $this->trade->byId($event->tradeId())->first();
 
         Mail::to($trade->seller->email)->send(new ElephpantTradeOffer($trade));
     }

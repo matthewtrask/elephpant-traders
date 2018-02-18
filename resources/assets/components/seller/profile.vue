@@ -31,7 +31,13 @@
     }
 
     .elephpant-image {
-        height: 24rem;
+        height: 35rem;
+        width: 225rem;
+    }
+
+    .thumbnail {
+        min-height: 58rem;
+        max-height: 58rem;
     }
 </style>
 <template>
@@ -47,8 +53,8 @@
                     <h3 class="text-right">Profile Information</h3>
                     <p class="text-right"><a  v-bind:href="'https://twitter.com/' + user.profile.twitter" class="twitter">@{{ user.profile.twitter }}</a></p>
                     <p class="text-right">Elephpants posted: {{ user.profile.elephpantCount }}</p>
-                    <p class="text-right"><button class="btn btn-success"><router-link tag="a" to="/profile/elephpant/post">Add Elephpant</router-link></button></p>
-                    <p class="text-right"><button class="btn btn-success"><router-link tag="a" to="/profile/elephpant/wishlist">Edit Wishlist</router-link></button></p>
+                    <p class="text-right"><a href="/profile/elephpant/post"><button class="btn btn-success">Add Elephpant</button></a></p>
+                    <p class="text-right"><a href="/profile/elephpant/wishlist"><button class="btn btn-success">Edit Wishlist</button></a></p>
                 </div>
             </div>
             <hr>
@@ -95,9 +101,8 @@
                             <h3>{{ post.title }}</h3>
                             <p>Seller: {{ post.seller }}</p>
                             <p>Posted: {{ post.posted | date }}</p>
-                            <p>{{ post.description }}</p>
                             <p>
-                                <a v-bind:href="'/#/elephpant/' + post.id + '/edit'"  class="btn btn-primary" role="button">Edit Post</a>
+                                <a v-bind:href="'/elephpant/' + post.id + '/edit'"  class="btn btn-primary" role="button">Edit Post</a>
                                 <a @click="removePost(post.id)" class="btn btn-default" data-toggle="modal" data-target="#myModal" role="button">Remove Post</a>
                             </p>
                         </div>
@@ -109,7 +114,7 @@
 </template>
 <script>
   import axios from 'axios';
-  import auth from '../../auth.js';
+  import auth from '../../js/auth.js';
   import Moment from 'moment';
   import EtNav from '../nav.vue';
 
@@ -117,7 +122,7 @@
     data() {
       return {
         auth: auth,
-        user: auth.user,
+        user: auth.user || null,
         showConfirmModal: false,
         postId: '',
       }

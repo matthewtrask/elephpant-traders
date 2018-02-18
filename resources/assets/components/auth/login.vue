@@ -8,6 +8,8 @@
 </style>
 <template>
     <div>
+        <et-nav></et-nav>
+
         <div class="container">
             <div class="row">
                 <div class="col-xs-6 col-xs-offset-3">
@@ -53,14 +55,15 @@
 </template>
 <script>
   import axios from 'axios';
-  import auth from '../../auth';
+  import auth from '../../js/auth';
+  import EtNav from '../nav.vue';
 
   export default {
     data() {
       return {
         email: '',
         password: '',
-        rememberMe: '',
+        rememberMe: false,
         showErrorMessage: false,
         auth: auth,
       };
@@ -77,5 +80,9 @@
         this.rememberMe = '';
       }
     },
+
+    components: {
+      EtNav,
+    }
   }
 </script>

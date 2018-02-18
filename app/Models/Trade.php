@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Query\Builder;
 
 class Trade extends Model
 {
@@ -51,8 +51,13 @@ class Trade extends Model
         return $query->where('accepted_at', '=', null);
     }
 
-    public function scopeByPostId($query, int $postId)
+    public function scopeByPostId(Builder $query, int $postId)
     {
-        return $query->where('post_id', $postId);
+        return $query->where('post_id', '=',  $postId);
+    }
+
+    public function scopeById(Builder $query, int $id)
+    {
+        return $query->where('id', '=', $id);
     }
 }

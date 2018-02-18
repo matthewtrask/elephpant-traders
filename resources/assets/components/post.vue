@@ -25,7 +25,7 @@
                         <div class="col-xs-12 col-md-6 description">
                             <p>Seller: {{ post.seller }}</p>
                             <p>Posted: {{ post.posted | date }}</p>
-                            <p> {{ post.description }}</p>
+                            <div v-html="post.description"></div>
                             <br>
                             <button class="btn btn-success" @click="initiateTrade()">Im interested!</button><hr>
                             <h4>Wanted Elephpants</h4>
@@ -41,7 +41,7 @@
 </template>
 <script>
   import axios from 'axios';
-  import auth from '../auth.js';
+  import auth from '../js/auth.js';
   import Moment from 'moment';
   import EtNav from './nav.vue';
 
@@ -91,11 +91,12 @@
           }, 5000);
         }
 
-        axios.post('/api/elephpants/trade?token=' + token, {
+        axios.post('/api/elephpants/trade', {
           postId: this.post.id,
           sellerId: this.post.sellerId,
-          token: token,
-        }).then(response => {
+        }, { headers: {
+            'Authorization': `Bearer ${token}`
+        }}).then(response => {
           this.showSuccessAlert = true;
 
           setTimeout(() => {
