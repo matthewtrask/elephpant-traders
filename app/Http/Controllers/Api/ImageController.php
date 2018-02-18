@@ -5,33 +5,34 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ElephpantRequest;
 use App\Services\S3Service;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
     /**
-     * @var S3Service
-     */
-    private $service;
-
-    /**
      * @var Response
      */
     private $response;
 
-    public function __construct(S3Service $service, Response $response)
+    public function __construct(Response $response)
     {
-        $this->service = $service;
         $this->response = $response;
     }
 
-    public function create(ElephpantRequest $request)
+    public function create(Request $request)
     {
-        $image = $request->image;
+        $image = $request->file('file');
 
-        Storage::disk('s3')->put('elephpant', $image);
+        Storage::disk('s3')->putFileAs(
+            snake_case($request->user()->email()),
+            $image,
+            $image->getClientOriginalName()
+        );
 
-        return $this->response->setContent($image);
+        Storage::disk('s3')->setVisibility(snake_case($request->user()->email()).'/'.$image->getClientOriginalName(), 'public');
+
+        return $this->response->setContent($request->user()->email().'/'. $image->getClientOriginalName());
     }
 }

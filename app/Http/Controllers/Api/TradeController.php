@@ -34,9 +34,9 @@ class TradeController extends Controller
 
     public function create(TradeRequest $request)
     {
-        $tradeId = $this->repository->create($request, $user);
+        $tradeId = $this->repository->create($request);
 
-        $this->sendTradeEmail($tradeId);
+        //$this->sendTradeEmail($tradeId);
 
         return $this->response->setStatusCode(201)->setContent('Trade initiated!');
     }

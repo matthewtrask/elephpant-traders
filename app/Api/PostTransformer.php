@@ -20,7 +20,7 @@ class PostTransformer extends TransformerAbstract
             'title' => $post->title,
             'seller' => $post->seller->name,
             'description' => $post->description,
-            'image' => 'https://s3.amazonaws.com/elephpant-swap/elephpant-swap/' . $post->image_link,
+            'image' => 'https://s3.amazonaws.com/elephpant-swap/' . $post->image_link,
             'posted' => $post->created_at,
             'newPost' => $post->newPost(),
         ];

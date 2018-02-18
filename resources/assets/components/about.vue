@@ -35,7 +35,7 @@
 </template>
 <script>
   import axios from 'axios';
-  import auth from '../auth.js';
+  import auth from '../js/auth.js';
   import EtNav from './nav.vue';
 
   export default {

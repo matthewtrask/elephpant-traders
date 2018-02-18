@@ -10,16 +10,15 @@
     }
   }
 
-    .image {
-        height: 35rem;
-        width: 225rem;
-    }
+  .image {
+    height: 35rem;
+    width: 225rem;
+  }
 
-    .thumbnail {
-        min-height: 58rem;
-        max-height: 58rem;
-
-    }
+  .thumbnail {
+    min-height: 58rem;
+    max-height: 58rem;
+  }
 </style>
 <template>
     <div>
@@ -32,7 +31,7 @@
                         <h1>{{ randomSubheading }}</h1>
                         <p>This is a community driven site aimed at helping people trade elephpants.</p>
                         <p>For more information on the elephpants themselves, check out <a class="link" href="http://afieldguidetoelephpants.net/">A Field Guide To Elephpants</a></p>
-                        <p><a v-bind:href="'/#/login'">Sign In</a> or <a v-bind:href="'/#/register'">Register</a> to post an elephpant or make a trade!</p>
+                        <p><a class="link" v-bind:href="'/login'">Sign In</a> or <a class="link" v-bind:href="'/register'">Register</a> to post an elephpant or make a trade!</p>
                     </div>
                 </div>
             </div>
@@ -46,8 +45,8 @@
                             <p>Seller: {{ post.seller }}</p>
                             <p>Posted: {{ post.posted | date }}</p>
                             <p>
-                                <a v-bind:href="'/#/posts/' + post.id"  class="btn btn-primary" role="button">View Post</a>
-                                <a v-bind:href="'/#/sellers/' + post.sellerId" class="btn btn-default" role="button">View Seller</a>
+                                <a v-bind:href="'/posts/' + post.id"  class="btn btn-primary" role="button">View Post</a>
+                                <a v-bind:href="'/sellers/' + post.sellerId" class="btn btn-default" role="button">View Seller</a>
                             </p>
                         </div>
                     </div>
@@ -60,7 +59,7 @@
   import axios from 'axios';
   import { orderBy, sample } from 'lodash';
   import Moment from 'moment';
-  import auth from '../auth.js';
+  import auth from '../js/auth.js';
   import EtNav from './nav.vue';
 
   export default {
@@ -68,7 +67,7 @@
       return {
         posts: [],
         auth: auth,
-        user: auth.user,
+        user: auth.user || null,
         subheading: [
           'Community driven elephpant migration.',
           'Migrating the herd since 2017.',
@@ -78,7 +77,7 @@
     },
 
     created() {
-      return auth.check();
+      auth.check();
     },
 
     computed: {

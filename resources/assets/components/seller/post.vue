@@ -1,11 +1,25 @@
 <style lang='scss'>
-
+    .vue-dropzone {
+        border: 2px dashed #8795A1;
+        margin-right: 1.5rem;
+        width: 62rem;
+        float: right;
+    }
 </style>
 <template>
     <div>
         <et-nav :user="user"></et-nav>
         <div class="container">
             <div class="row">
+                <div class="alert alert-danger" role="alert" v-if="showError"><i class="fa fa-times-circle" aria-hidden="true"></i>
+                    There was an error marking this Elephpant for trade. Please try again soon!
+                </div>
+
+                <div class="alert alert-success" role="alert" v-if="showSuccess === true"><i class="fa fa-check" aria-hidden="true"></i>
+                    Your elephpant was posted and is ready to be traded!
+                </div>
+
+
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
                     <h2 class="text-center">Add New Elephpant</h2>
                     <form method="post" class="form-horizontal" enctype="multipart/form-data" @submit.prevent="upload">
@@ -23,18 +37,19 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Image: {{ image }}</label>
+                            <label class="col-sm-2 control-label">Image</label>
                             <div class="col-sm-10">
-                                <vue-core-image-upload
-                                        :class="['btn', 'btn-success']"
-                                        :crop="false"
-                                        @imageuploaded="imageuploaded"
-                                        inputOfFile="image"
-                                        :data="data"
-                                        :max-file-size="5242880"
-                                        url="/api/elephpants/image">
-                                </vue-core-image-upload>
+                                <div class="alert alert-success" role="alert" v-if="imageUploaded"><i class="fa fa-check" aria-hidden="true"></i>
+                                     Your image was uploaded successfully!
+                                </div>
                             </div>
+                            <vue-dropzone
+                                    ref="myVueDropzone"
+                                    id="dropzone"
+                                    :options="dropzoneOptions"
+                                    v-on:vdropzone-thumbnail="thumbnail"
+                                    v-on:vdropzone-success="success">
+                            </vue-dropzone>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
@@ -49,8 +64,9 @@
 </template>
 <script>
   import axios from 'axios';
-  import auth from '../../auth.js';
-  import VueCoreImageUpload  from 'vue-core-image-upload';
+  import VueDropzone from 'vue2-dropzone';
+  import 'vue2-dropzone/dist/vue2Dropzone.css';
+  import auth from '../../js/auth.js';
   import EtNav from '../nav.vue';
 
   export default {
@@ -62,7 +78,16 @@
         description: '',
         image: '',
         showSuccess: false,
-        token: '',
+        showError: false,
+        imageUploaded: false,
+        dropzoneOptions: {
+          acceptedFiles: 'image/*',
+          url: '/api/elephpants/image',
+          thumbnailWidth: 150,
+          maxFilesize: 2,
+          dictDefaultMessage: "<i class='fa fa-cloud-upload'></i> UPLOAD",
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('id_token')}` },
+        },
       };
     },
 
@@ -82,20 +107,29 @@
           userId: this.user.profile.id,
         }).then(response => {
           this.showSuccess = true;
-          window.location.replace('/#/profile');
+
+          setTimeout(() => {
+            this.showSuccess = false;
+            window.location.replace('/#/profile');
+          }, 5000);
         }).catch(error => {
-          console.error(error);
+          this.showError = true;
+
+          setTimeout(() => {
+            this.showError = false;
+          }, 5000);
         });
       },
 
-      imageuploaded(res) {
-        this.image = res.data.src;
+      success(res) {
+        this.imageUploaded = true;
+        this.image = res.name;
       },
     },
 
     components: {
-      VueCoreImageUpload,
-      EtNav
+      EtNav,
+      VueDropzone
     },
   };
 </script>

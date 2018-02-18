@@ -13,24 +13,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('elephpants', ['uses' => 'Api\PostingsController@index']);
-Route::get('elephpants/post/{id}', ['uses' => 'Api\PostingsController@show'])->where('id', '[0-9]+');
-Route::get('elephpants/sellers/{id}', ['uses' => 'Api\SellersController@show'])->where('id', '[0-9]+');
-Route::delete('elephpants/remove/{id}', ['uses' => 'Api\PostingsController@destroy'])->where('id', '[0-9]+');
-Route::post('elephpants/image', ['uses' => 'Api\ImageController@create']);
-Route::post('elephpants', ['uses' => 'Api\PostingsController@create']);
-Route::post('elephpants/wishlist', ['uses' => 'Api\WishlistController@create']);
-Route::delete('elephpants/wishlist/{id}', ['uses' => 'Api\WishlistController@destroy'])->where('id', '[0-9]+');
-Route::post('elephpants/trade', ['uses' => 'Api\TradeController@create']);
-Route::put('elephpants/trade', ['uses' => 'Api\TradeController@edit']);
-Route::delete('elephpants/trade/{tradeId}', ['uses' => 'Api\TradeController@destroy'])->where('tradeId', '[0-9]+');
-
 Route::post('register', ['uses' => 'Api\AuthController@register']);
 Route::post('login', ['uses' => 'Api\AuthController@create']);
 
 
-Route::get('user', ['uses' => 'Api\UsersController@show'])->middleware('auth:api');
+Route::get('elephpants', ['uses' => 'Api\PostingsController@index']);
+Route::get('elephpants/post/{id}', ['uses' => 'Api\PostingsController@show'])->where('id', '[0-9]+');
+Route::get('elephpants/sellers/{id}', ['uses' => 'Api\SellersController@show'])->where('id', '[0-9]+');
+Route::delete('elephpants/remove/{id}', ['uses' => 'Api\PostingsController@destroy'])->where('id', '[0-9]+');
+Route::put('elephpants/trade', ['uses' => 'Api\TradeController@edit']);
+Route::delete('elephpants/trade/{tradeId}', ['uses' => 'Api\TradeController@destroy'])->where('tradeId', '[0-9]+');
 
+
+
+Route::get('user', ['uses' => 'Api\UsersController@show'])->middleware('auth:api');
+Route::post('elephpants', ['uses' => 'Api\PostingsController@create'])->middleware('auth:api');
+Route::post('elephpants/image', ['uses' => 'Api\ImageController@create'])->middleware('auth:api');
+Route::post('elephpants/trade', ['uses' => 'Api\TradeController@create'])->middleware('auth:api');
+Route::post('elephpants/wishlist', ['uses' => 'Api\WishlistController@create'])->middleware('auth:api');
+Route::delete('elephpants/wishlist/{id}', ['uses' => 'Api\WishlistController@destroy'])->middleware('auth:api')->where('id', '[0-9]+');
 
 /**
  * Social Auth

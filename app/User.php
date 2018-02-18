@@ -32,9 +32,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function userId() : int
+    public function userId() : UserId
     {
-        return (int) $this->id;
+        return new UserId($this->id);
     }
 
     public function email() : string

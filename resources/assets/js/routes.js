@@ -1,14 +1,14 @@
 import VueRouter from 'vue-router';
-import HomeComponent from './components/home.vue';
-import AboutComponent from './components/about.vue';
-import PostComponent from './components/post.vue';
-import SellerComponent from './components/seller.vue';
-import ProfileComponent from './components/seller/profile.vue';
-import ProfilePostComponent from './components/seller/post.vue';
-import ProfileWishlistComponent from './components/seller/wishlist.vue';
-import ProfileAddWishlistComponent from './components/seller/add-wishlist.vue';
-import RegisterComponent from './components/auth/register.vue';
-import LoginComponent from './components/auth/login.vue';
+import HomeComponent from '../components/home.vue';
+import AboutComponent from '../components/about.vue';
+import PostComponent from '../components/post.vue';
+import SellerComponent from '../components/seller.vue';
+import ProfileComponent from '../components/seller/profile.vue';
+import ProfilePostComponent from '../components/seller/post.vue';
+import ProfileWishlistComponent from '../components/seller/wishlist.vue';
+import ProfileAddWishlistComponent from '../components/seller/add-wishlist.vue';
+import RegisterComponent from '../components/auth/register.vue';
+import LoginComponent from '../components/auth/login.vue';
 
 
 const routes = [
@@ -69,6 +69,8 @@ const routes = [
 ];
 
 export default new VueRouter({
+  routes,
   hashbang: false,
-  routes
+  linkActiveClass: 'active',
+  mode: 'history',
 });

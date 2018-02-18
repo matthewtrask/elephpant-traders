@@ -33,7 +33,7 @@ class UsersController extends Controller
 
     public function show(Request $request)
     {
-        $data = $this->repository->fetch($request->user()->userId());
+        $data = $this->repository->fetch($request->user()->userId()->toInteger());
 
         return $this->response->setContent(
             fractal($data)->transformWith($this->transformer)

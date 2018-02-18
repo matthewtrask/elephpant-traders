@@ -37,7 +37,7 @@
   import Moment from 'moment';
   import { orderBy } from 'lodash';
   import EtNav from './nav.vue';
-  import auth from './../auth.js';
+  import auth from '../js/auth.js';
 
   export default {
     created() {

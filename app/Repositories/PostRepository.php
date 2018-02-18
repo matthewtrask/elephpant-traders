@@ -41,7 +41,7 @@ class PostRepository
         $post->title = $data->getTitle();
         $post->seller_id = $data->getUserId();
         $post->description = $this->service->convertMarkdown($data->getDescription());
-        $post->image_link = $data->getImageUrl();
+        $post->image_link = $data->user()->email() . '/' . $data->getImageUrl();
 
         return $post->save();
     }

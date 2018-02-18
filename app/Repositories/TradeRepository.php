@@ -32,13 +32,13 @@ class TradeRepository
         //
     }
 
-    public function create($data, $user)
+    public function create($data)
     {
         $trade = new Trade();
         $trade->post_id = $data->getPostId();
         $trade->status = 'pending';
         $trade->seller_id = $data->getSellerId();
-        $trade->buyer_id = $user->userId();
+        $trade->buyer_id = $data->user()->userId();
         $trade->accepted = 0;
         $trade->received = 0;
         $trade->accepted_at = null;
