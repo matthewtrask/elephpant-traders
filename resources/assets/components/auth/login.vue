@@ -39,6 +39,7 @@
                                         <input type="checkbox" v-model="rememberMe"> Remember Me
                                     </label>
                                     <p>Need to create an account? <router-link to="register">Click here</router-link></p>
+                                    <p>Need to reset your password? <router-link to="password-reset">Click here</router-link></p>
                                 </div>
 
                                 <div class="form-group">

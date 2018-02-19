@@ -9,7 +9,8 @@ import ProfileWishlistComponent from '../components/seller/wishlist.vue';
 import ProfileAddWishlistComponent from '../components/seller/add-wishlist.vue';
 import RegisterComponent from '../components/auth/register.vue';
 import LoginComponent from '../components/auth/login.vue';
-
+import EmailResetComponent from '../components/auth/email.vue';
+import PasswordResetComponent from '../components/auth/password.vue';
 
 const routes = [
   {
@@ -65,6 +66,16 @@ const routes = [
     path: '/login',
     component: LoginComponent,
     name: 'LoginComponent',
+  },
+  {
+    path: '/password-reset',
+    component: EmailResetComponent,
+    name: 'EmailResetComponent',
+  },
+  {
+    path: '/password/reset/:token',
+    component: PasswordResetComponent,
+    name: 'PasswordResetComponent',
   },
 ];
 
