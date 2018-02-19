@@ -8,7 +8,7 @@
 </style>
 <template>
     <div>
-        <et-nav></et-nav>
+        <et-nav :user="user"></et-nav>
 
         <div class="container">
             <div class="row">
@@ -66,6 +66,7 @@
         rememberMe: false,
         showErrorMessage: false,
         auth: auth,
+        user: auth.user || null,
       };
     },
 
