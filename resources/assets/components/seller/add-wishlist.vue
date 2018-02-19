@@ -54,10 +54,12 @@
       addElephpant() {
         let token = localStorage.getItem('id_token');
 
-        axios.post('/api/elephpants/wishlist?token=' + token, {
+        axios.post('/api/elephpants/wishlist', {
           elephpant: this.elephpant,
           desireLevel: this.desireLevel,
-        }).then(response => {
+        }, { headers: {
+         'Authorization': `Bearer ${token}`,
+        }}).then(response => {
           this.showSuccess = true;
 
           setTimeout(() => {
