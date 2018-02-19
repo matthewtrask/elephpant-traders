@@ -9,6 +9,13 @@
             float: right;
         }
     }
+
+    a {
+        color: #fff;
+        &:hover {
+            color: #fff;
+        }
+    }
 </style>
 <template>
     <div>

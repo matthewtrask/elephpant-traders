@@ -30,7 +30,7 @@ class WishlistController extends Controller
 
     public function create(WishlistRequest $request)
     {
-        $this->repository->create($request, $user->userId());
+        $this->repository->create($request, $request->user()->userId()->toInteger());
 
         return $this->response->setContent('Elephpant added to wishlist');
     }
