@@ -16,6 +16,11 @@ class WishlistRepository
         $this->wanted = $wanted;
     }
 
+    public function get()
+    {
+        return Wanted::all();
+    }
+
     public function create($data, $userId)
     {
         $wanted = new Wanted();

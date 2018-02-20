@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router';
 import HomeComponent from '../components/home.vue';
 import AboutComponent from '../components/about.vue';
+import WishlistComponent from '../components/wishlist.vue';
 import PostComponent from '../components/post.vue';
 import SellerComponent from '../components/seller.vue';
 import ProfileComponent from '../components/seller/profile.vue';
@@ -22,6 +23,11 @@ const routes = [
     path: '/about',
     component: AboutComponent,
     name: 'AboutComponent',
+  },
+  {
+    path: '/wishlist',
+    component: WishlistComponent,
+    name: 'WishlistComponent',
   },
   {
     path: '/posts/:id',
