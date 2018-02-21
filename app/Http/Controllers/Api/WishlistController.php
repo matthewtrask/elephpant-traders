@@ -39,7 +39,7 @@ class WishlistController extends Controller
     {
         $elephpants = $this->repository->get();
 
-        $this->response->setStatusCode(200)->setContent(fractal($elephpants)->transformWith($this->transformer)->toArray());
+        return $this->response->setStatusCode(200)->setContent(fractal($elephpants)->transformWith($this->transformer)->toArray());
     }
 
     public function create(WishlistRequest $request)
