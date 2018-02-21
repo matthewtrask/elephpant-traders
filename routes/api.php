@@ -24,6 +24,7 @@ Route::delete('elephpants/remove/{id}', ['uses' => 'Api\PostingsController@destr
 Route::put('elephpants/trade', ['uses' => 'Api\TradeController@edit']);
 Route::delete('elephpants/trade/{tradeId}', ['uses' => 'Api\TradeController@destroy'])->where('tradeId', '[0-9]+');
 
+Route::get('wishlist', ['uses' => 'Api\WishlistController@index']);
 
 
 Route::get('user', ['uses' => 'Api\UsersController@show'])->middleware('auth:api');
