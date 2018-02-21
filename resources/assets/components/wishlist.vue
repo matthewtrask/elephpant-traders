@@ -14,7 +14,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">{{ elephpant.elephpant }}</div>
                         <div class="panel-body">
-                            <p>Who wants it? <a :href="/sellers/ + elephpant.sellerId">{{ elephpant.poster }}</a>s</p>
+                            <p>Who wants it? <a :href="/sellers/ + elephpant.sellerId">{{ elephpant.poster }}</a></p>
                             <p>Want Level: {{ elephpant.desire }}</p>
                             <p>Posted at: {{ elephpant.posted.date | date }}</p>
                           </div>
