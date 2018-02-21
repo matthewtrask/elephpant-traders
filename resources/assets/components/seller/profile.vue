@@ -39,11 +39,19 @@
         min-height: 58rem;
         max-height: 58rem;
     }
+
+    span.close {
+        float: right;
+    }
 </style>
 <template>
     <div>
         <et-nav :user="user"></et-nav>
         <div class="container">
+            <div class="alert alert-warning" v-if="user.profile.elephpantCount">
+                <p>Hey! You haven't posted an elephpant to trade yet! Go ahead and post one now and see if we can migrate an elephpant!</p>
+                <span class="close"><i class="fa fa-times"></i></span>
+            </div>
             <div class="row">
                 <div class="col-sm-12 col-md-4">
                     <h1> {{ user.profile.name }}</h1>
