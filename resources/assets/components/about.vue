@@ -15,7 +15,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-6">
+                    <h2 class="page-header">Planned Features</h2>
+                    <ul>
+                        <li>Login authentication via social media</li>
+                        <li>Map-based elephpant migration tracking</li>
+                        <li>Ability to post multiple images</li>
+                        <li>More to come!</li>
+                    </ul>
+                </div>
+                <div class="col-xs-6">
                     <h2 class="page-header">Colophon</h2>
                     <p>This site was built with the following technologies:</p>
                     <ul>
