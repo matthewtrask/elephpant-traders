@@ -2,6 +2,10 @@
     .description {
         padding-top: 6rem;
     }
+
+    img {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08);
+    }
 </style>
 <template>
     <div>
@@ -23,7 +27,7 @@
                             <img v-bind:src="post.image" class="img-responsive" alt="Responsive image">
                         </div>
                         <div class="col-xs-12 col-md-6 description">
-                            <p>Seller: {{ post.seller }}</p>
+                            <p>Seller: <a :href="user.profile.links.profile">{{ post.seller }}</a></p>
                             <p>Posted: {{ post.posted | date }}</p>
                             <div v-html="post.description"></div>
                             <br>

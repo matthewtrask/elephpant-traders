@@ -36,14 +36,21 @@
     }
 
     .thumbnail {
-        min-height: 58rem;
-        max-height: 58rem;
+        min-height: 40rem;
+        max-height: 44rem;
+    }
+
+    span.close {
+        float: right;
     }
 </style>
 <template>
     <div>
         <et-nav :user="user"></et-nav>
         <div class="container">
+            <div class="alert alert-warning" v-if="user.profile.elephpantCount === 0">
+                <p>Hey! You haven't posted an elephpant to trade yet! Go ahead and post one now and see if we can migrate an elephpant!</p>
+            </div>
             <div class="row">
                 <div class="col-sm-12 col-md-4">
                     <h1> {{ user.profile.name }}</h1>
@@ -130,7 +137,9 @@
 
     methods:{
       removePost(postId) {
-        axios.delete(`/api/elephpants/remove/${postId}`).then(response => {
+        axios.delete(`/api/elephpants/remove/${postId}`, { headers: {
+          'Authorization': `Bearer ${localStorage.getItem('id_token')}`,
+        }}).then(response => {
           auth.check();
         }).catch(error => {
           console.error(error);

@@ -30,6 +30,9 @@ class SellerTransformer extends TransformerAbstract
             'twitter' => $user->twitter,
             'image' => $this->image($user),
             'elephpantCount' => $user->posts->count(),
+            'links' => [
+                'profile' => '/sellers/' . $user->userId()->toInteger(),
+            ],
         ];
     }
 
