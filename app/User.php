@@ -5,6 +5,7 @@ namespace App;
 use App\Models\Post;
 use App\Models\Trade;
 use App\Models\Wanted;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -60,5 +61,15 @@ class User extends Authenticatable
     public function postings()
     {
         return $this->hasMany(Trade::class, 'seller_id', 'id');
+    }
+
+    public function name()
+    {
+        return $this->name;
+    }
+
+    public function scopeNotEmailed(Builder $query)
+    {
+        return $query->where('emailed', '=', 0);
     }
 }

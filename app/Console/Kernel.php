@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\GenerateSiteMap;
+use App\Console\Commands\PostElephpants;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         GenerateSiteMap::class,
+        PostElephpants::class,
     ];
 
     /**
@@ -26,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sitemap:generate')->daily();
+        $schedule->command('elephpant:trade')->daily();
     }
 
     /**

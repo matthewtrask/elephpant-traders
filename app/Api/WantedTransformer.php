@@ -12,6 +12,7 @@ class WantedTransformer extends TransformerAbstract
         return [
             'id' => $wanted->id,
             'sellerId' => $wanted->seller_id,
+            'poster' => $wanted->seller->name(),
             'elephpant' => $wanted->elephpant,
             'desire' => $this->desireLevel($wanted->desire),
             'posted' => $wanted->created_at,

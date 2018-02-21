@@ -24,6 +24,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/wishlist"><img height="1rem" width="1rem" src="/img/default_user.png"> Wanted Elephpants</a></li>
                         <!-- Authentication Links -->
                         <li v-if="!this.user.profile"><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>
                              Login</a></li>
