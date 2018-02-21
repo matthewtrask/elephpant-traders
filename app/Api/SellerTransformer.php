@@ -25,7 +25,7 @@ class SellerTransformer extends TransformerAbstract
     public function transform(User $user)
     {
         return [
-            'id' => $user->userId(),
+            'id' => $user->userId()->toInteger(),
             'name' => $user->name,
             'twitter' => $user->twitter,
             'image' => $this->image($user),
