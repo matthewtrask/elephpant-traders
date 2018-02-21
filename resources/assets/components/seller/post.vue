@@ -98,13 +98,14 @@
     methods: {
       upload() {
         axios.post('/api/elephpants', {
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
-          },
           title: this.title,
           description: this.description,
           image: this.image,
           userId: this.user.profile.id,
+        }, {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+          },
         }).then(response => {
           this.showSuccess = true;
 
