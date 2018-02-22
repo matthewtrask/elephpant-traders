@@ -19,6 +19,10 @@
     min-height: 58rem;
     max-height: 58rem;
   }
+
+    .text-3xl {
+        font-size: 6rem;
+    }
 </style>
 <template>
     <div>
@@ -32,6 +36,24 @@
                         <p>This is a community driven site aimed at helping people trade elephpants.</p>
                         <p>For more information on the elephpants themselves, check out <a class="link" href="http://afieldguidetoelephpants.net/">A Field Guide To Elephpants</a></p>
                         <p><a class="link" v-bind:href="'/login'">Sign In</a> or <a class="link" v-bind:href="'/register'">Register</a> to post an elephpant or make a trade!</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div>
+                        <h3>Elephpants Migrated</h3>
+                        <p class="lead text-3xl">{{ count.completedTradeCount }}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div>
+                        <h3>Pending Migration</h3>
+                        <p class="lead text-3xl">{{ count.pendingTradeCount }}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div>
+                        <h3>Total Elephpants</h3>
+                        <p class="lead text-3xl">{{ count.totalElephpant }}</p>
                     </div>
                 </div>
             </div>
@@ -68,6 +90,7 @@
         posts: [],
         auth: auth,
         user: auth.user || null,
+        count:[],
         subheading: [
           'Community driven elephpant migration.',
           'Migrating the herd since 2017.',
@@ -92,12 +115,21 @@
 
     mounted() {
       this.getPosts();
+      this.getCount();
     },
 
     methods: {
       getPosts() {
         axios.get('/api/elephpants').then(response => {
           this.posts = response.data.data;
+        }).catch(error => {
+          console.log(error);
+        });
+      },
+
+      getCount() {
+        axios.get('/api/elephpants/count').then(response => {
+          this.count = response.data.data[0];
         }).catch(error => {
           console.log(error);
         });

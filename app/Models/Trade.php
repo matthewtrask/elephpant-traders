@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Trade extends Model
 {
+    const PENDING = 'pending';
+
     protected $table = 'trades';
 
     public function seller() : BelongsTo
@@ -24,6 +26,11 @@ class Trade extends Model
     public function elephpant()
     {
         return $this->belongsTo(Post::class, 'post_id', 'id');
+    }
+
+    public function scopePending(Builder $query)
+    {
+        return $query->where('status', '=', self::PENDING);
     }
 
     public function scopeAccepted(Builder $query) : Builder

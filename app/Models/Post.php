@@ -28,6 +28,11 @@ class Post extends Model
         return $this->hasMany(Wanted::class, 'seller_id', 'seller_id');
     }
 
+    public function trade() : HasMany
+    {
+        return $this->hasMany(Trade::class, 'post_id', 'id');
+    }
+
     public function scopeById($query, int $id)
     {
         return $query->where('id', $id);
@@ -46,5 +51,20 @@ class Post extends Model
         }
 
         return false;
+    }
+
+    public function pendingTradeCount()
+    {
+        return $this->trade()->pending()->count();
+    }
+
+    public function completedTradeCount()
+    {
+        return $this->trade()->completed()->count();
+    }
+
+    public function totalElephpants()
+    {
+        return $this->count();
     }
 }

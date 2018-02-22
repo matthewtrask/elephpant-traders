@@ -23,6 +23,8 @@ Route::get('elephpants/sellers/{id}', ['uses' => 'Api\SellersController@show'])-
 Route::put('elephpants/trade', ['uses' => 'Api\TradeController@edit']);
 Route::delete('elephpants/trade/{tradeId}', ['uses' => 'Api\TradeController@destroy'])->where('tradeId', '[0-9]+');
 
+Route::get('elephpants/count', ['uses' => 'Api\CountController@index']);
+
 Route::get('wishlist', ['uses' => 'Api\WishlistController@index']);
 
 
