@@ -8,16 +8,24 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h2 class="page-header">About Elephpant Trade</h2>
-                    <p>What started as a tweet has morphed into this. Credit goes to Colin O'Dell for the initial idea, and letting me run with it.</p>
-                    <p>This is a completely open source project, passphrases not included. See something you think could be different, open an issue!</p>
-                    <p>If you are feeling froggy, you can make a PR against the current code base. I just ask that you branch off what will soon be a develop branc.</p>
-                    <p>Eventually, I promise, we will have a full CI suite, as well as social auth. We have some bigger ideas too!</p>
-                    <p>If you or your company would like to help cover some server costs, that would be absolutely wonder, and you can find me on <a href="https://twitter.com/matthewtrask">twitter to talk!</a></p>
+                    <p>What started as a tweet has morphed into this site. Credit goes to Colin O'Dell for the initial idea, and letting me run with it.</p>
+                    <p>This is a completely open source project, passphrases not included. If you see something you think could be different, open an issue!</p>
+                    <p>If you are feeling froggy, you can make a PR against the current code base. I just ask that you branch off what will soon be a develop branch.</p>
+                    <p>If you or your company would like to help cover some server costs, that would be absolutely wonderful, and you can find me on <a href="https://twitter.com/matthewtrask">twitter to talk!</a></p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="page-header">Colophone</h2>
+                <div class="col-xs-6">
+                    <h2 class="page-header">Planned Features</h2>
+                    <ul>
+                        <li>Login authentication via social media</li>
+                        <li>Map-based elephpant migration tracking</li>
+                        <li>Ability to post multiple images</li>
+                        <li>More to come!</li>
+                    </ul>
+                </div>
+                <div class="col-xs-6">
+                    <h2 class="page-header">Colophon</h2>
                     <p>This site was built with the following technologies:</p>
                     <ul>
                         <li>PHP 7.1</li>
