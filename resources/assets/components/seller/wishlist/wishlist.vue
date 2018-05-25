@@ -28,7 +28,7 @@
                         <h4>Wishlist</h4>
                     </div>
                     <div class="col-xs-12 col-md-3 add">
-                        <button class="btn btn-success"><router-link to="/profile/elephpant/wishlist/add">Add Elephpant</router-link></button>
+                        <router-link to="/profile/elephpant/wishlist/add" class="btn btn-success" role="button">Add Elephpant</router-link>
                     </div>
                     <hr>
                     <table class="table table-striped">
