@@ -57,8 +57,8 @@
 <script>
   import axios from 'axios';
   import { remove } from 'lodash';
-  import auth from '../../js/auth.js';
-  import EtNav from '../nav.vue';
+  import auth from '../../../js/auth.js';
+  import EtNav from '../../nav.vue';
   import Moment from 'moment';
 
   export default {
@@ -80,7 +80,11 @@
       },
 
       removeElephpant(id) {
-        axios.delete('/api/elephpants/wishlist/' + id).then(response => {
+        const token = localStorage.getItem('id_token');
+
+        axios.delete('/api/elephpants/wishlist/' + id, { headers: {
+          'Authorization': `Bearer ${token}`
+        }}).then(response => {
           return auth.check();
         }).catch(error => {
           console.error(error);
